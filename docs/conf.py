@@ -19,9 +19,9 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'Sphinx Copybutton'
-copyright = '2018, Chris Holdgraf'
-author = 'Chris Holdgraf'
+project = 'Sphinx Thebelab'
+copyright = '2020, Executable Book Project'
+author = 'Executable Book Project'
 
 # The short X.Y version
 version = ''
