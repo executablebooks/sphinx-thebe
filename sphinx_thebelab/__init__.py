@@ -11,16 +11,27 @@ __version__ = "0.0.1dev0"
 
 logger = logging.getLogger(__name__)
 
+
 def st_static_path(app):
-    static_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '_static'))
+    static_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "_static"))
     app.config.html_static_path.append(static_path)
 
 
 def add_to_context(app, config):
     # Update the global context
-    config.html_context.update({'thebelab_selector': config.thebelab_config.get("selector", ".thebelab")})
-    config.html_context.update({'thebelab_selector_code': config.thebelab_config.get("selector-code", "pre")})
-    config.html_context.update({'thebelab_selector_output': config.thebelab_config.get("selector-output", ".output")})
+    config.html_context.update(
+        {"thebelab_selector": config.thebelab_config.get("selector", ".thebelab")}
+    )
+    config.html_context.update(
+        {"thebelab_selector_code": config.thebelab_config.get("selector-code", "pre")}
+    )
+    config.html_context.update(
+        {
+            "thebelab_selector_output": config.thebelab_config.get(
+                "selector-output", ".output"
+            )
+        }
+    )
 
 
 def init_thebelab_core(app, env, docnames):
@@ -105,9 +116,7 @@ def _split_repo_url(url):
         end = url.split("github.com/")[-1]
         org, repo = end.split("/")[:2]
     else:
-        logger.warning(
-            f"Currently Thebelab repositories must be on GitHub, got {url}"
-        )
+        logger.warning(f"Currently Thebelab repositories must be on GitHub, got {url}")
         org = repo = None
     return org, repo
 
@@ -166,9 +175,9 @@ def skip(self, node):
 
 
 def setup(app):
-    logger.verbose('Adding copy buttons to code blocks...')
+    logger.verbose("Adding copy buttons to code blocks...")
     # Add our static path
-    app.connect('builder-inited', st_static_path)
+    app.connect("builder-inited", st_static_path)
 
     # configuration for this tool
     app.add_config_value("thebelab_config", {}, "html")
@@ -183,9 +192,9 @@ def setup(app):
     app.add_directive("thebelab-button", ThebeLabButton)
 
     # Add relevant code to headers
-    app.add_css_file('thebelab.css')
+    app.add_css_file("thebelab.css")
     app.add_js_file("thebelab_config.js")
-    app.add_js_file('thebelab.js')
+    app.add_js_file("thebelab.js")
 
     # ThebeButtonNode is the button that activates thebelab
     # and is only rendered for the HTML builder
@@ -198,6 +207,8 @@ def setup(app):
         man=(skip, None),
     )
 
-    return {"version": __version__,
-            "parallel_read_safe": True,
-            "parallel_write_safe": True}
+    return {
+        "version": __version__,
+        "parallel_read_safe": True,
+        "parallel_write_safe": True,
+    }
