@@ -4,6 +4,26 @@ thebelab-kernel: ir
 
 # Configuring thebelab
 
+## Change the HTML selector to mark interactive cells
+
+By default, `sphinx-thebelab` will be run on any cells with the `thebelab` class.
+However, you can customize the HTML selector to use other classes, elements, etc.
+
+For example, if you wanted to convert **all code cells**, you could use the following
+selector:
+
+```python
+thebelab_config = {
+   "selector": "div.highlight"
+}
+```
+
+```{note}
+`sphinx-thebelab` will subsequently look for any `pre` blocks inside of elements it
+finds with the `selector` configuration value. These are the blocks that will be
+converted to interactive with `thebelab`.
+```
+
 ## Setting the Kernel
 
 You can set the kernel that Thebelab uses on a page by adding metadata to your
