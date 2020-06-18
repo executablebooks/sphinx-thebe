@@ -1,5 +1,4 @@
 version: 2
-name: sphinx-thebelab
 python:
   version: 3
   install:
