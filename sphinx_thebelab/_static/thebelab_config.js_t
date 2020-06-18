@@ -1,1 +1,3 @@
 const thebelab_selector = "{{ thebelab_selector }}"
+const thebelab_selector_code = "{{ thebelab_selector_code }}"
+const thebelab_selector_output = "{{ thebelab_selector_output }}"

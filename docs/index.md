@@ -35,14 +35,27 @@ extensions = [
 
 ## Use
 
-To use `sphinx-thebelab`, include code blocks in your documentation that contain
-the class `thebelab`. You can add code blocks like so:
+There are two steps to using `sphinx-thebelab`. First, you must mark certain
+parts of your page as "ready for thebelab". Next, you must insert a button onto
+the page to tell Thebelab to initialize.
+
+### Mark elements for thebelab
+
+By default, thebelab will be run on any elements in your documentation that contain
+the class `thebelab` and that have a `<pre`> element underneath them.
+
+You can add code blocks like so:
 
 ````
 ```{code-block}
 :class: thebelab
 ```
 ````
+
+By default, `sphinx-thebelab` will look for any HTML `<pre>` element *inside* the code
+block. Thebelab will run on that element.
+
+### Add an activate button to your page
 
 Next, insert an "activate" button in your documentation with the following
 directive:
@@ -51,6 +64,9 @@ directive:
 ```{thebelab-button}
 ```
 ````
+
+Clicking this button will activate Thebelab on the page. If you'd like to manually
+add your own button (e.g. with your own extension or theme), see [](add-custom-button).
 
 ## Example
 

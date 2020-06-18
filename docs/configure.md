@@ -96,6 +96,7 @@ These code blocks will be run automatically once the kernel is ready, and their 
 will be displayed below.
 
 
+(add-custom-button)=
 ## Adding your own button to start Thebelab
 
 By default, Thebelab encourages users to use the `thebelab-button` directive to

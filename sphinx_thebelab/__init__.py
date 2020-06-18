@@ -15,9 +15,13 @@ def st_static_path(app):
     static_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '_static'))
     app.config.html_static_path.append(static_path)
 
+
 def add_to_context(app, config):
     # Update the global context
     config.html_context.update({'thebelab_selector': config.thebelab_config.get("selector", ".thebelab")})
+    config.html_context.update({'thebelab_selector_code': config.thebelab_config.get("selector-code", "pre")})
+    config.html_context.update({'thebelab_selector_output': config.thebelab_config.get("selector-output", ".output")})
+
 
 def init_thebelab_core(app, env, docnames):
     config_thebe = app.config["thebelab_config"]

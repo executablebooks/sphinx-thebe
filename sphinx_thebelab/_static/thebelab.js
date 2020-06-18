@@ -24,7 +24,7 @@ var initThebelab = () => {
     codeCells.forEach((codeCell, index) => {
         const codeCellId = index => `codecell${index}`
         codeCell.id = codeCellId(index)
-        codeCellText = codeCell.querySelector("pre")
+        codeCellText = codeCell.querySelector(selector_code)
 
         // Clean up the language to make it work w/ CodeMirror and add it to the cell
         dataLanguage = "{{ kernelName }}"
