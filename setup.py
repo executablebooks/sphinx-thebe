@@ -32,5 +32,5 @@ setup(
     },
     classifiers=["License :: OSI Approved :: MIT License"],
     install_requires=["sphinx>=1.8"],
-    extras_require={"sphinx": ["myst-parser", "pyyaml"],},
+    extras_require={"sphinx": ["myst-parser[sphinx]"],},
 )
