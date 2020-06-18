@@ -24,6 +24,51 @@ finds with the `selector` configuration value. These are the blocks that will be
 converted to interactive with `thebelab`.
 ```
 
+## Including outputs with your code
+
+If you'd like to include outputs in the *static* version of your page, and only
+overwrite them once the user has run that Thebelab cell, you can configure `sphinx-thebelab`
+to detect and keep the outputs associated with some code. To do so, use
+the `selector-output` configuration. This is a selector that is searched for *within* any
+items discovered by `selector`. If an output is found, it will be placed just after the
+code and Thebelab will detect it.
+
+For example, the following code:
+
+`````
+````{container} thebelab
+```{code-block} r
+print("hi")
+```
+
+```{container} output
+"hi"
+```
+````
+`````
+
+Defines a *parent container* in which we'll put both code and the output of the
+code. We'll use a `code-block` for the code, and another `container` node with our
+`output` class for the output. `sphinx-gallery` will detect the parent container because
+it has a `thebelab` class. It will detect the `pre` block inside the container as the
+code, and it will detect the `<div>` block with the `output` class as the output.
+
+The result is that initializing Thebelab *retains* the output until the cell is
+executed, like so:
+
+```{thebelab-button}
+```
+
+````{container} thebelab
+```{code-block} r
+print("hi")
+```
+
+```{container} output
+"hi"
+```
+````
+
 ## Setting the Kernel
 
 You can set the kernel that Thebelab uses on a page by adding metadata to your

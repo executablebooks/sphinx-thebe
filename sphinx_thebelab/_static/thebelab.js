@@ -22,15 +22,24 @@ var initThebelab = () => {
     // Find all code cells, replace with Thebelab interactive code cells
     const codeCells = document.querySelectorAll(thebelab_selector)
     codeCells.forEach((codeCell, index) => {
-        const codeCellId = index => `codecell${index}`
-        codeCell.id = codeCellId(index)
-        codeCellText = codeCell.querySelector(selector_code)
+        const codeCellId = index => `codecell${index}`;
+        codeCell.id = codeCellId(index);
+        codeCellText = codeCell.querySelector(thebelab_selector_code);
+        codeCellOutput = codeCell.querySelector(thebelab_selector_output);
 
         // Clean up the language to make it work w/ CodeMirror and add it to the cell
-        dataLanguage = "{{ kernelName }}"
-        dataLanguage = detectLanguage(dataLanguage);
-        codeCellText.setAttribute('data-language', dataLanguage)
-        codeCellText.setAttribute('data-executable', 'true')
+        dataLanguage = detectLanguage(kernelName);
+
+        if (codeCellText) {
+            codeCellText.setAttribute('data-language', dataLanguage);
+            codeCellText.setAttribute('data-executable', 'true');
+
+            // If we had an output, insert it just after the `pre` cell
+            if (codeCellOutput) {
+                $(codeCellOutput).attr("data-output", "");
+                $(codeCellOutput).insertAfter(codeCellText);
+            }
+        }
     });
 
     // Remove the event listener from the page so keyboard press doesn't
@@ -61,6 +70,8 @@ var initThebelab = () => {
 var detectLanguage = (language) => {
     if (language.indexOf('python') > -1) {
         language = "python";
+    } else if (language === 'ir') {
+        language = "r"
     }
     return language;
 }

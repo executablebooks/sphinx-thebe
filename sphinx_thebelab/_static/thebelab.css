@@ -3,17 +3,8 @@
     background: red;
 }
 
-// Thebelab buttons
-.thebelab-cell {
-    // To ensure that thebelab cells are always the top of the Z-stack
-    position: relative;
-    z-index: 999;
-
-    // Remove styling since we use our own
-    border: 0 !important;
-    border-radius: 0 !important;
-    margin-top: 0 !important;
-    margin-bottom: 8px !important;
+.thebelab-cell pre {
+    background: none;
 }
 
 .thebelab-button {
