@@ -23,19 +23,14 @@ var initThebelab = () => {
     const codeCells = document.querySelectorAll(thebelab_selector)
     codeCells.forEach((codeCell, index) => {
         const codeCellId = index => `codecell${index}`
-        const id = codeCellId(index)
+        codeCell.id = codeCellId(index)
+        codeCellText = codeCell.querySelector("pre")
 
         // Clean up the language to make it work w/ CodeMirror and add it to the cell
         dataLanguage = "{{ kernelName }}"
         dataLanguage = detectLanguage(dataLanguage);
-        codeCell.setAttribute('data-language', dataLanguage)
-        codeCell.setAttribute('data-executable', 'true')
-
-        // If the code cell is hidden, show it
-        var inputCheckbox = document.querySelector(`input#hidebtn${codeCell.id}`);
-        if (inputCheckbox !== null) {
-            setCodeCellVisibility(inputCheckbox, 'visible');
-        }
+        codeCellText.setAttribute('data-language', dataLanguage)
+        codeCellText.setAttribute('data-executable', 'true')
     });
 
     // Remove the event listener from the page so keyboard press doesn't
@@ -47,23 +42,18 @@ var initThebelab = () => {
     // Init thebelab
     thebelab.bootstrap();
 
-    // Remove copy buttons since they won't work anymore
-    const copyAndThebeButtons = document.querySelectorAll('.copybtn')
-    copyAndThebeButtons.forEach((button, index) => {
-        button.remove();
-    });
-
     // Remove outputs since they'll be stale
+    // TODO: instead, select outputs and add the thebelab output metadata to preview them first
     const outputs = document.querySelectorAll('.cell_output')
     outputs.forEach((output, index) => {
         output.remove();
     });
 
     // Find any cells with an initialization tag and ask ThebeLab to run them when ready
-    var thebeInitCells = document.querySelectorAll('div.tag_thebelab-init');
+    var thebeInitCells = document.querySelectorAll('.thebelab-init');
     thebeInitCells.forEach((cell) => {
         console.log("Initializing ThebeLab with cell: " + cell.id);
-        cell.querySelector('#thebelab-activate-button').click();
+        cell.querySelector('.thebelab-run-button').click();
     });
 }
 

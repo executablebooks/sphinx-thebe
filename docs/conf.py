@@ -41,7 +41,7 @@ release = ''
 extensions = ['sphinx_thebelab', "sphinx_thebelab", "myst_parser"]
 
 thebelab_config = {
-    "repository_url": "https://github.com/binder-examples/jupyterlab",
+    "repository_url": "https://github.com/binder-examples/r",
     "selector": ".thebelab"
 }
 

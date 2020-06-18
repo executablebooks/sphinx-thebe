@@ -3,6 +3,7 @@ import os
 from sphinx.util import logging
 from docutils.parsers.rst import Directive, directives
 from docutils import nodes
+import json
 
 from pathlib import Path
 
@@ -47,13 +48,21 @@ def update_thebelab_context(app, doctree, docname):
     # Thebelab configuration
     # Choose the kernel we'll use
     meta = app.env.metadata.get(docname, {})
-    kernel_name = "python3"
-    if meta.get("kernelspec") is not None:
-        kernel_name = json.loads(meta["kernelspec"]).get("name", kernel_name)
+    kernel_name = meta.get("thebelab-kernel")
+    if kernel_name is None:
+        if meta.get("kernelspec"):
+            kernel_name = json.loads(meta["kernelspec"]).get("name")
+        else:
+            kernel_name = "python3"
+
+    # Codemirror syntax
     cm_language = kernel_name
     if "python" in cm_language:
         cm_language = "python"
+    elif cm_language == "ir":
+        cm_language = "r"
 
+    # Create the URL for the kernel request
     repo_url = config_thebe.get("repository_url")
     branch = config_thebe.get("repository_branch", "master")
     org, repo = _split_repo_url(repo_url)
@@ -159,7 +168,7 @@ def setup(app):
 
     # configuration for this tool
     app.add_config_value("thebelab_config", {}, "html")
-   
+
     # Add configuration value to the template
     app.connect("config-inited", add_to_context)
 

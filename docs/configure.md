@@ -1,0 +1,76 @@
+---
+thebelab-kernel: ir
+---
+
+# Configuring thebelab
+
+## Setting the Kernel
+
+You can set the kernel that Thebelab uses on a page by adding metadata to your
+page. To do so, add the following metadata to the top of your page:
+
+```
+thebelab-kernel: <kernel-name>
+```
+
+For example, this page had the following metadata in it:
+
+```
+thebelab-kernel: ir
+```
+
+In addition, this website is configured to use the [Binder R example repository](https://github.com/binder-examples/r)
+for its environment. As a result, we can now run R code interactively with Thebelab:
+
+
+```{thebelab-button}
+```
+
+```{code-block}
+:class: thebelab, thebelab-init
+
+# ggplot2 examples
+library(ggplot2)
+
+# create factors with value labels
+mtcars$gear <- factor(mtcars$gear,levels=c(3,4,5),
+  	labels=c("3gears","4gears","5gears"))
+mtcars$am <- factor(mtcars$am,levels=c(0,1),
+  	labels=c("Automatic","Manual"))
+mtcars$cyl <- factor(mtcars$cyl,levels=c(4,6,8),
+   labels=c("4cyl","6cyl","8cyl"))
+```
+
+```{code-block}
+:class: thebelab, thebelab-init
+# Kernel density plots for mpg
+# grouped by number of gears (indicated by color)
+qplot(mpg, data=mtcars, geom="density", fill=gear, alpha=I(.5),
+   main="Distribution of Gas Milage", xlab="Miles Per Gallon",
+   ylab="Density")
+```
+
+```{code-block}
+:class: thebelab
+
+# Scatterplot of mpg vs. hp for each combination of gears and cylinders
+# in each facet, transmittion type is represented by shape and color
+qplot(hp, mpg, data=mtcars, shape=am, color=am,
+   facets=gear~cyl, size=I(3),
+   xlab="Horsepower", ylab="Miles per Gallon")
+```
+
+## Automatically running some code
+
+You can tag code blocks to run as soon as the kernel is ready (i.e., without any user input)
+by adding the `thebelab-init` class to the code blocks. For example:
+
+````
+```{code-block}
+:class: thebelab, thebelab-init
+print("hi")
+```
+````
+
+These code blocks will be run automatically once the kernel is ready, and their outputs
+will be displayed below.
