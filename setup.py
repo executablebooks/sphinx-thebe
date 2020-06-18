@@ -3,18 +3,6 @@ from pathlib import Path
 
 from setuptools import setup, find_packages
 
-if (os.path.isdir('clipboard.js') and
-        not os.path.islink('sphinx_thebelab/_static/clipboard.min.js')):
-    raise SystemExit("Error: Support for symbolic links is required")
-
-if (os.path.isdir('clipboard.js') and
-        not os.path.isfile('clipboard.js/dist/clipboard.min.js')):
-    raise SystemExit(
-        """Error: clipboard.js submodule not available, run
-
-        git submodule update --init
-        """)
-
 with open('./README.md', 'r') as ff:
     readme_text = ff.read()
 
@@ -35,10 +23,9 @@ setup(
     url="https://github.com/ExecutableBookProject/sphinx-thebelab",
     license='MIT License',
     packages=find_packages(),
-    package_data={'sphinx_thebelab': ['_static/copybutton.css',
-                                        '_static/copybutton.js_t',
-                                        '_static/copy-button.svg',
-                                        '_static/clipboard.min.js']},
+    package_data={'sphinx_thebelab': ['_static/thebelab_config.js_t',
+                                        '_static/thebelab.css',
+                                        '_static/thebelab.js']},
     classifiers=["License :: OSI Approved :: MIT License"],
     install_requires=[
         "sphinx>=1.8"
