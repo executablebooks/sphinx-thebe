@@ -44,6 +44,12 @@ the page to tell Thebelab to initialize.
 By default, thebelab will be run on any elements in your documentation that contain
 the class `thebelab` and that have a `<pre`> element underneath them.
 
+```{note}
+This documentation is written in [MyST Markdown](https://myst-parser.readthedocs.io),
+so the syntax for writing directives looks different from reStructuredText. However,
+rST works just fine as well.
+```
+
 You can add code blocks like so:
 
 ````
