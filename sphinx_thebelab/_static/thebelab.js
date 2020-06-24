@@ -3,17 +3,19 @@
  */
 
 var initThebelab = () => {
+    // If Thebelab hasn't loaded, wait a bit and try again. This
+    // happens because we load ClipboardJS asynchronously.
+    if (window.thebelab === undefined) {
+        console.log("thebelab not loaded, retrying...");
+        setTimeout(initThebelab, 500)
+        return
+    }
+
     console.log("Adding thebelab to code cells...");
 
     // Load thebe config in case we want to update it as some point
     thebe_config = $('script[type="text/x-thebe-config"]')[0]
 
-    // If Thebelab hasn't loaded, wait a bit and try again. This
-    // happens because we load ClipboardJS asynchronously.
-    if (window.thebelab === undefined) {
-        setTimeout(addThebelabToCodeCells, 250)
-    return
-    }
 
     // If we already detect a Thebelab cell, don't re-run
     if (document.querySelectorAll('div.thebelab-cell').length > 0) {
@@ -37,7 +39,7 @@ var initThebelab = () => {
         console.log("Status changed:", data.status, data.message);
         $(".thebelab-launch-button ")
         .attr("class", "thebelab-button thebelab-launch-button thebe-status-" + data.status)
-        .find(".loading-text").html("Launching from mybinder.org: <span class='status'>" + data.status + "</span>");
+        .find(".loading-text").html("<span class='launch_msg'>Launching from mybinder.org: </span><span class='status'>" + data.status + "</span>");
 
         // Find any cells with an initialization tag and ask ThebeLab to run them when ready
         if (data.status === "ready") {

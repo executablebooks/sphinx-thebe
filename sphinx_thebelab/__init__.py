@@ -37,6 +37,7 @@ def add_to_context(app, config):
 def init_thebelab_core(app, env, docnames):
     config_thebe = app.config["thebelab_config"]
     if not config_thebe:
+        logger.warning("Didn't find `thebelab_config` in conf.py, add to use thebelab")
         return
 
     # Add core libraries
@@ -185,7 +186,7 @@ def setup(app):
     # Add configuration value to the template
     app.connect("config-inited", add_to_context)
 
-    # Include Thebelab for interactive code if it's enabled
+    # Include Thebelab core docs
     app.connect("env-before-read-docs", init_thebelab_core)
     app.connect("doctree-resolved", update_thebelab_context)
 
