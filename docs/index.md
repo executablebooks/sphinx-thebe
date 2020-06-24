@@ -16,7 +16,7 @@ Integrate thebelab into your documentation to make your code cells interactive.
 For example, click the button below. Notice that the code block beneath becomes
 editable and runnable!
 
-```{thebelab-button}
+```{thebelab-button} Launch thebelab
 ```
 
 ```{code-block}

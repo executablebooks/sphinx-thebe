@@ -130,7 +130,7 @@ class ThebeButtonNode(nodes.Element):
     is enabled, the node is added at the bottom of the document.
     """
 
-    def __init__(self, rawsource="", *children, text="Make live", **attributes):
+    def __init__(self, rawsource="", *children, text="Run code", **attributes):
         super().__init__("", text=text)
 
     def html(self):
