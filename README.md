@@ -1,6 +1,7 @@
 # sphinx-thebelab
 
 [![Documentation](https://readthedocs.org/projects/sphinx-thebelab/badge/?version=latest)](https://sphinx-thebelab.readthedocs.io/en/latest/?badge=latest)
+[![PyPI](https://readthedocs.org/projects/sphinx-thebelab/badge/?version=latest)](https://pypi.org/project/sphinx-thebelab)
 
 Integrate thebelab into your documentation to make your code cells interactive.
 
