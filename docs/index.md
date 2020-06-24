@@ -13,6 +13,18 @@
 
 Integrate thebelab into your documentation to make your code cells interactive.
 
+For example, click the button below. Notice that the code block beneath becomes
+editable and runnable!
+
+```{thebelab-button}
+```
+
+```{code-block}
+:class: thebelab
+
+print("hi")
+```
+
 ## Install
 
 To install `sphinx-thebelab` first clonse and install it:
@@ -74,18 +86,7 @@ directive:
 Clicking this button will activate Thebelab on the page. If you'd like to manually
 add your own button (e.g. with your own extension or theme), see [](add-custom-button).
 
-## Example
-
-The following example shows this functionality with a Python kernel:
-
-```{thebelab-button}
-```
-
-```{code-block}
-:class: thebelab
-
-print("hi")
-```
+## Configure
 
 For more information about how to configure `sphinx-thebelab`, see [](configure.md)
 

@@ -136,7 +136,7 @@ class ThebeButtonNode(nodes.Element):
     def html(self):
         text = self["text"]
         return (
-            '<button title="{text}" class="thebelab-button"'
+            '<button title="{text}" class="thebelab-button thebelab-launch-button"'
             'onclick="initThebelab()">{text}</button>'.format(text=text)
         )
 

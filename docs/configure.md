@@ -93,10 +93,12 @@ for its environment. As a result, we can now run R code interactively with Thebe
 
 ```{code-block}
 :class: thebelab, thebelab-init
-
-# ggplot2 examples
+# Load ggplot - this will be automatically-run
 library(ggplot2)
+```
 
+```{code-block}
+:class: thebelab, thebelab-init
 # create factors with value labels
 mtcars$gear <- factor(mtcars$gear,levels=c(3,4,5),
   	labels=c("3gears","4gears","5gears"))
