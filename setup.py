@@ -25,7 +25,6 @@ setup(
     packages=find_packages(),
     package_data={
         "sphinx_thebelab": [
-            "_static/thebelab_config.js_t",
             "_static/thebelab.css",
             "_static/thebelab.js",
         ]

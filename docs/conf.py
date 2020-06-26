@@ -42,7 +42,11 @@ extensions = ["sphinx_thebelab", "sphinx_thebelab", "myst_parser"]
 
 thebelab_config = {
     "repository_url": "https://github.com/binder-examples/r",
-    "selector": ".thebelab",
+    # "repository_branch": "master",
+    # "selector": ".thebelab",
+    # "selector_input": ,
+    # "selector_output": ,
+    # "codemirror-theme": "blackboard"  # Doesn't currently work
 }
 
 # Add any paths that contain templates here, relative to this directory.

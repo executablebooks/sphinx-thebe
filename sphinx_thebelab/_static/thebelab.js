@@ -35,11 +35,17 @@ var initThebelab = () => {
     })
 
     // Set thebelab event hooks
+    var thebelabStatus;
     thebelab.on("status", function (evt, data) {
         console.log("Status changed:", data.status, data.message);
+
         $(".thebelab-launch-button ")
-        .attr("class", "thebelab-button thebelab-launch-button thebe-status-" + data.status)
+        .removeClass("thebe-status-" + thebelabStatus)
+        .addClass("thebe-status-" + data.status)
         .find(".loading-text").html("<span class='launch_msg'>Launching from mybinder.org: </span><span class='status'>" + data.status + "</span>");
+
+        // Now update our thebelab status
+        thebelabStatus = data.status;
 
         // Find any cells with an initialization tag and ask ThebeLab to run them when ready
         if (data.status === "ready") {
@@ -57,7 +63,7 @@ var initThebelab = () => {
     codeCells.forEach((codeCell, index) => {
         const codeCellId = index => `codecell${index}`;
         codeCell.id = codeCellId(index);
-        codeCellText = codeCell.querySelector(thebelab_selector_code);
+        codeCellText = codeCell.querySelector(thebelab_selector_input);
         codeCellOutput = codeCell.querySelector(thebelab_selector_output);
 
         // Clean up the language to make it work w/ CodeMirror and add it to the cell

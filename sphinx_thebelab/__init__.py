@@ -17,23 +17,6 @@ def st_static_path(app):
     app.config.html_static_path.append(static_path)
 
 
-def add_to_context(app, config):
-    # Update the global context
-    config.html_context.update(
-        {"thebelab_selector": config.thebelab_config.get("selector", ".thebelab")}
-    )
-    config.html_context.update(
-        {"thebelab_selector_code": config.thebelab_config.get("selector-code", "pre")}
-    )
-    config.html_context.update(
-        {
-            "thebelab_selector_output": config.thebelab_config.get(
-                "selector-output", ".output"
-            )
-        }
-    )
-
-
 def init_thebelab_core(app, env, docnames):
     config_thebe = app.config["thebelab_config"]
     if not config_thebe:
@@ -43,6 +26,17 @@ def init_thebelab_core(app, env, docnames):
     # Add core libraries
     opts = {"async": "async"}
     app.add_js_file(filename="https://unpkg.com/thebelab@latest/lib/index.js", **opts)
+
+    # Add configuration variables
+    thebelab_selector = app.config.thebelab_config.get("selector", ".thebelab")
+    thebelab_selector_input = app.config.thebelab_config.get("selector_input", "pre")
+    thebelab_selector_output = app.config.thebelab_config.get("selector_output", ".output")
+    thebelab_config = f"""
+        const thebelab_selector = "{ thebelab_selector }"
+        const thebelab_selector_input = "{ thebelab_selector_input }"
+        const thebelab_selector_output = "{ thebelab_selector_output }"
+    """
+    app.add_js_file(None, body=thebelab_config)
     app.add_js_file(filename="thebelab.js", **opts)
 
 
@@ -59,7 +53,7 @@ def update_thebelab_context(app, doctree, docname):
         raise ValueError(
             "thebelab configuration must be `True` or a dictionary for configuration."
         )
-    codemirror_theme = config_thebe.get("codemirror_theme", "abcdef")
+    codemirror_theme = config_thebe.get("codemirror-theme", "abcdef")
 
     # Thebelab configuration
     # Choose the kernel we'll use
@@ -122,7 +116,7 @@ def _split_repo_url(url):
     return org, repo
 
 
-class ThebeButtonNode(nodes.Element):
+class ThebeLabButtonNode(nodes.Element):
     """Appended to the doctree by the ThebeButton directive
 
     Renders as a button to enable thebelab on the page.
@@ -161,7 +155,7 @@ class ThebeLabButton(Directive):
 
     def run(self):
         kwargs = {"text": self.arguments[0]} if self.arguments else {}
-        return [ThebeButtonNode(**kwargs)]
+        return [ThebeLabButtonNode(**kwargs)]
 
 
 # Used to render an element node as HTML
@@ -183,9 +177,6 @@ def setup(app):
     # configuration for this tool
     app.add_config_value("thebelab_config", {}, "html")
 
-    # Add configuration value to the template
-    app.connect("config-inited", add_to_context)
-
     # Include Thebelab core docs
     app.connect("env-before-read-docs", init_thebelab_core)
     app.connect("doctree-resolved", update_thebelab_context)
@@ -194,13 +185,11 @@ def setup(app):
 
     # Add relevant code to headers
     app.add_css_file("thebelab.css")
-    app.add_js_file("thebelab_config.js")
-    app.add_js_file("thebelab.js")
 
-    # ThebeButtonNode is the button that activates thebelab
+    # ThebeLabButtonNode is the button that activates thebelab
     # and is only rendered for the HTML builder
     app.add_node(
-        ThebeButtonNode,
+        ThebeLabButtonNode,
         html=(visit_element_html, None),
         latex=(skip, None),
         textinfo=(skip, None),

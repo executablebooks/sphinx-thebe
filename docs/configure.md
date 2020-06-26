@@ -29,7 +29,7 @@ converted to interactive with `thebelab`.
 If you'd like to include outputs in the *static* version of your page, and only
 overwrite them once the user has run that Thebelab cell, you can configure `sphinx-thebelab`
 to detect and keep the outputs associated with some code. To do so, use
-the `selector-output` configuration. This is a selector that is searched for *within* any
+the `selector_output` configuration. This is a selector that is searched for *within* any
 items discovered by `selector`. If an output is found, it will be placed just after the
 code and Thebelab will detect it.
 
@@ -163,4 +163,35 @@ directive:
 <button title="Make live" class="thebelab-button" onclick="initThebelab()">
   Make live
 </button>
+```
+
+## Choose a codemirror theme
+
+You can customize `sphinx-thebelab` to use the codemirror theme of your choice.
+To do so, use the following configuration:
+
+```
+thebelab_config = {
+   "codemirror-theme": "<cm-theme>"
+}
+```
+
+See [the CodeMirror theme demo](https://codemirror.net/demo/theme.html) for a list
+of themes that you can use, and what they look like.
+
+
+## Configuration reference
+
+Here's a reference of all of the configuration values avialable to `sphinx-thebelab`.
+Many of these eventually make their was into the `thebelab` configuration. You can
+find a [reference for `thebelab` configuration here](https://thebelab.readthedocs.io/en/latest/config_reference.html).
+
+```
+thebelab_config = {
+    "repository_url": "<your-repo-url>",
+    "repository_branch": "<your-repo-branch>",
+    "selector": "<selector-for-code-cells>",
+    "selector_input": "<selector-for-cell-input>",
+    "selector_output": "<selector-for-cell-output>",
+}
 ```
