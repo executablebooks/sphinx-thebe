@@ -20,7 +20,7 @@ setup(
     long_description=readme_text,
     long_description_content_type="text/markdown",
     author="Executable Book Project",
-    url="https://github.com/ExecutableBookProject/sphinx-thebelab",
+    url="https://github.com/executablebooks/sphinx-thebelab",
     license="MIT License",
     packages=find_packages(),
     package_data={
