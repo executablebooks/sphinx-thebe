@@ -7,7 +7,7 @@ import json
 
 from pathlib import Path
 
-__version__ = "0.0.2"
+__version__ = "0.0.3dev0"
 
 logger = logging.getLogger(__name__)
 
