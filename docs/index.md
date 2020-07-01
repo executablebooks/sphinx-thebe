@@ -11,7 +11,8 @@
 :alt: PyPi page
 ```
 
-Integrate thebelab into your documentation to make your code cells interactive.
+Make your code cells interactive with a kernel provided by [Thebelab](http://thebelab.readthedocs.org/)
+and [Binder](https://mybinder.org).
 
 For example, click the button below. Notice that the code block beneath becomes
 editable and runnable!
@@ -23,6 +24,12 @@ editable and runnable!
 :class: thebelab
 
 print("hi")
+```
+
+```{note}
+This package is a Sphinx wrapper around the excellent [thebelab project](http://thebelab.readthedocs.org/),
+a javascript tool to convert static code cells into interactive cells backed
+by a kernel.
 ```
 
 ## Install
