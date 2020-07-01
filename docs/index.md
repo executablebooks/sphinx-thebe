@@ -86,6 +86,12 @@ directive:
 Clicking this button will activate Thebelab on the page. If you'd like to manually
 add your own button (e.g. with your own extension or theme), see [](add-custom-button).
 
+```{note}
+By default, `sphinx-thebelab` will serve the Binder environment for the
+[jupyter-stacks-datascience repository](https://github.com/binder-examples/jupyter-stacks-datascience).
+See [](configure.md) for information on choosing your own environment.
+```
+
 ## Configure
 
 For more information about how to configure `sphinx-thebelab`, see [](configure.md)
