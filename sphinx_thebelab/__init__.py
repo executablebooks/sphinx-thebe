@@ -17,10 +17,10 @@ def st_static_path(app):
     app.config.html_static_path.append(static_path)
 
 
-def init_thebelab_core(app, env, docnames):
-    config_thebe = app.config["thebelab_config"]
+def init_thebelab_core(app, env):
+    config_thebe = app.config["thebe_config"]
     if not config_thebe:
-        logger.warning("Didn't find `thebelab_config` in conf.py, add to use thebelab")
+        logger.warning("Didn't find `thebe_config` in conf.py, add to use thebelab")
         return
 
     # Add core libraries
@@ -28,21 +28,21 @@ def init_thebelab_core(app, env, docnames):
     app.add_js_file(filename="https://unpkg.com/thebelab@latest/lib/index.js", **opts)
 
     # Add configuration variables
-    thebelab_selector = app.config.thebelab_config.get("selector", ".thebelab")
-    thebelab_selector_input = app.config.thebelab_config.get("selector_input", "pre")
-    thebelab_selector_output = app.config.thebelab_config.get("selector_output", ".output")
-    thebelab_config = f"""
-        const thebelab_selector = "{ thebelab_selector }"
-        const thebelab_selector_input = "{ thebelab_selector_input }"
-        const thebelab_selector_output = "{ thebelab_selector_output }"
+    thebe_selector = app.config.thebe_config.get("selector", ".thebe")
+    thebe_selector_input = app.config.thebe_config.get("selector_input", "pre")
+    thebe_selector_output = app.config.thebe_config.get("selector_output", ".output")
+    thebe_config = f"""
+        const thebe_selector = "{ thebe_selector }"
+        const thebe_selector_input = "{ thebe_selector_input }"
+        const thebe_selector_output = "{ thebe_selector_output }"
     """
-    app.add_js_file(None, body=thebelab_config)
+    app.add_js_file(None, body=thebe_config)
     app.add_js_file(filename="thebelab.js", **opts)
 
 
 def update_thebelab_context(app, doctree, docname):
     """Add thebelab config nodes to this doctree."""
-    config_thebe = app.config["thebelab_config"]
+    config_thebe = app.config["thebe_config"]
     if not config_thebe:
         return
 
@@ -58,7 +58,7 @@ def update_thebelab_context(app, doctree, docname):
     # Thebelab configuration
     # Choose the kernel we'll use
     meta = app.env.metadata.get(docname, {})
-    kernel_name = meta.get("thebelab-kernel")
+    kernel_name = meta.get("thebe-kernel")
     if kernel_name is None:
         if meta.get("kernelspec"):
             kernel_name = json.loads(meta["kernelspec"]).get("name")
@@ -131,7 +131,7 @@ class ThebeLabButtonNode(nodes.Element):
     def html(self):
         text = self["text"]
         return (
-            '<button title="{text}" class="thebelab-button thebelab-launch-button"'
+            '<button title="{text}" class="thebelab-button thebe-launch-button"'
             'onclick="initThebelab()">{text}</button>'.format(text=text)
         )
 
@@ -175,13 +175,13 @@ def setup(app):
     app.connect("builder-inited", st_static_path)
 
     # configuration for this tool
-    app.add_config_value("thebelab_config", {}, "html")
+    app.add_config_value("thebe_config", {}, "html")
 
     # Include Thebelab core docs
-    app.connect("env-before-read-docs", init_thebelab_core)
     app.connect("doctree-resolved", update_thebelab_context)
+    app.connect("env-updated", init_thebelab_core)
 
-    app.add_directive("thebelab-button", ThebeLabButton)
+    app.add_directive("thebe-button", ThebeLabButton)
 
     # Add relevant code to headers
     app.add_css_file("thebelab.css")

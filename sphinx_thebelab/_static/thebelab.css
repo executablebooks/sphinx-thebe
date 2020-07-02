@@ -1,7 +1,4 @@
-.thebelab-cell pre {
-    background: none;
-}
-
+/* Thebelab Buttons */
 .thebelab-button {
     z-index: 999;
     display: inline-block;
@@ -24,13 +21,17 @@
     background-color: #fcfcfc;
 }
 
-.thebelab-launch-button {
+.thebe-launch-button {
     height: 2.2em;
     font-size: .8em;
     border: 1px black solid;
 }
 
 /* Thebelab Cell */
+.thebelab-cell pre {
+  background: none;
+}
+
 .thebelab-cell .thebelab-input {
     padding-left: 1em;
     margin-bottom: .5em;
@@ -48,22 +49,22 @@ button.thebelab-button.thebelab-run-button {
 }
 
 /* Loading button */
-button.thebelab-launch-button div.spinner {
+button.thebe-launch-button div.spinner {
     float: left;
     margin-right: 1em;
 }
 
 /* Remove the spinner when thebelab is ready */
-.thebelab-launch-button.thebe-status-ready .spinner {
+.thebe-launch-button.thebe-status-ready .spinner {
     display: none;
 }
 
-.thebelab-launch-button span.status {
+.thebe-launch-button span.status {
     font-family: monospace;
     font-weight: bold;
 }
 
-.thebelab-launch-button.thebe-status-ready span.status {
+.thebe-launch-button.thebe-status-ready span.status {
     color: green;
 }
 

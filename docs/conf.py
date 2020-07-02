@@ -40,10 +40,10 @@ release = ""
 # ones.
 extensions = ["sphinx_thebelab", "sphinx_thebelab", "myst_parser"]
 
-thebelab_config = {
+thebe_config = {
     "repository_url": "https://github.com/binder-examples/jupyter-stacks-datascience",
     # "repository_branch": "master",
-    # "selector": ".thebelab",
+    # "selector": ".thebe",
     # "selector_input": ,
     # "selector_output": ,
     # "codemirror-theme": "blackboard"  # Doesn't currently work

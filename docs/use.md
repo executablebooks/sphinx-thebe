@@ -21,7 +21,7 @@ You can add code blocks like so:
 
 ````
 ```{code-block}
-:class: thebelab
+:class: thebe
 ```
 ````
 
@@ -34,13 +34,13 @@ Next, insert an "activate" button in your documentation with the following
 directive:
 
 ````
-```{thebelab-button}
+```{thebe-button}
 ```
 ````
 
 The button looks like this:
 
-```{thebelab-button}
+```{thebe-button}
 ```
 
 Clicking this button will activate Thebelab on the page. If you'd like to manually
@@ -69,13 +69,13 @@ the libraries that are installed. See [](configure.md) for more information.
 
 For example:
 
-```{thebelab-button} Launch examples below!
+```{thebe-button} Launch examples below!
 ```
 
 ### Code outputs
 
 ```{code-block}
-:class: thebelab, thebelab-init
+:class: thebe, thebe-init
 
 import numpy as np
 np.random.seed(1337)
@@ -86,7 +86,7 @@ print(data[1, :10])
 ### DataFrames
 
 ```{code-block}
-:class: thebelab
+:class: thebe
 
 import pandas as pd
 df = pd.DataFrame(data.T, columns=["a", "b"])
@@ -96,7 +96,7 @@ df.head(5)
 ### PNG outputs
 
 ```{code-block}
-:class: thebelab
+:class: thebe
 import matplotlib.pyplot as plt
 plt.scatter(*data, c=data[0], s=200)
 ```

@@ -18,12 +18,12 @@ var initThebelab = () => {
 
 
     // If we already detect a Thebelab cell, don't re-run
-    if (document.querySelectorAll('div.thebelab-cell').length > 0) {
+    if (document.querySelectorAll('div.thebe-cell').length > 0) {
         return;
     }
 
     // Update thebelab buttons with loading message
-    $(".thebelab-launch-button").each((ii, button) => {
+    $(".thebe-launch-button").each((ii, button) => {
         button.innerHTML = `
         <div class="spinner">
             <div class="rect1"></div>
@@ -39,7 +39,7 @@ var initThebelab = () => {
     thebelab.on("status", function (evt, data) {
         console.log("Status changed:", data.status, data.message);
 
-        $(".thebelab-launch-button ")
+        $(".thebe-launch-button ")
         .removeClass("thebe-status-" + thebelabStatus)
         .addClass("thebe-status-" + data.status)
         .find(".loading-text").html("<span class='launch_msg'>Launching from mybinder.org: </span><span class='status'>" + data.status + "</span>");
@@ -49,22 +49,22 @@ var initThebelab = () => {
 
         // Find any cells with an initialization tag and ask ThebeLab to run them when ready
         if (data.status === "ready") {
-            var thebeInitCells = document.querySelectorAll('.thebelab-init');
+            var thebeInitCells = document.querySelectorAll('.thebe-init');
             thebeInitCells.forEach((cell) => {
                 console.log("Initializing ThebeLab with cell: " + cell.id);
-                cell.querySelector('.thebelab-run-button').click();
+                cell.querySelector('.thebe-run-button').click();
             });
         }
     });
 
 
     // Find all code cells, replace with Thebelab interactive code cells
-    const codeCells = document.querySelectorAll(thebelab_selector)
+    const codeCells = document.querySelectorAll(thebe_selector)
     codeCells.forEach((codeCell, index) => {
         const codeCellId = index => `codecell${index}`;
         codeCell.id = codeCellId(index);
-        codeCellText = codeCell.querySelector(thebelab_selector_input);
-        codeCellOutput = codeCell.querySelector(thebelab_selector_output);
+        codeCellText = codeCell.querySelector(thebe_selector_input);
+        codeCellOutput = codeCell.querySelector(thebe_selector_output);
 
         // Clean up the language to make it work w/ CodeMirror and add it to the cell
         dataLanguage = detectLanguage(kernelName);
