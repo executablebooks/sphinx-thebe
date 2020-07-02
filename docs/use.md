@@ -57,7 +57,17 @@ See [](configure.md) for information on choosing your own environment.
 `sphinx-thebelab` uses Jupyter kernels to execute your page's code and return the
 results, and Binder in order to run the infrastructure for execution. This means that
 you can do nearly anything with `sphinx-thebelab` that you could do from within a
-Jupyter Notebook cell. For example:
+Jupyter Notebook cell.
+
+```{admonition} You can customize your environment
+:class: tip
+
+You can customize the environment that powers your interactive code sessions using
+a Binder repository. This may allow for different kinds of functionality depending on
+the libraries that are installed. See [](configure.md) for more information.
+```
+
+For example:
 
 ```{thebelab-button} Launch examples below!
 ```
