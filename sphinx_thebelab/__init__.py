@@ -17,6 +17,17 @@ def st_static_path(app):
     app.config.html_static_path.append(static_path)
 
 
+def init_thebe_default_config(app, env, docnames):
+    thebe_config = app.config.thebe_config
+    defaults = {
+        "selector": ".thebe",
+        "selector_input": "pre",
+        "selector_output": ".output"
+    }
+    for key, val in defaults.items():
+        if key not in thebe_config:
+            thebe_config[key] = val
+
 def init_thebelab_core(app, env):
     config_thebe = app.config["thebe_config"]
     if not config_thebe:
@@ -28,13 +39,10 @@ def init_thebelab_core(app, env):
     app.add_js_file(filename="https://unpkg.com/thebelab@latest/lib/index.js", **opts)
 
     # Add configuration variables
-    thebe_selector = app.config.thebe_config.get("selector", ".thebe")
-    thebe_selector_input = app.config.thebe_config.get("selector_input", "pre")
-    thebe_selector_output = app.config.thebe_config.get("selector_output", ".output")
     thebe_config = f"""
-        const thebe_selector = "{ thebe_selector }"
-        const thebe_selector_input = "{ thebe_selector_input }"
-        const thebe_selector_output = "{ thebe_selector_output }"
+        const thebe_selector = "{ app.config.thebe_config['selector'] }"
+        const thebe_selector_input = "{ app.config.thebe_config['selector_input'] }"
+        const thebe_selector_output = "{ app.config.thebe_config['selector_output'] }"
     """
     app.add_js_file(None, body=thebe_config)
     app.add_js_file(filename="thebelab.js", **opts)
@@ -178,13 +186,15 @@ def setup(app):
     # Add our static path
     app.connect("builder-inited", st_static_path)
 
-    # configuration for this tool
-    app.add_config_value("thebe_config", {}, "html")
+    # Set default values for the configuration
+    app.connect("env-before-read-docs", init_thebe_default_config)
 
     # Include Thebelab core docs
     app.connect("doctree-resolved", update_thebelab_context)
     app.connect("env-updated", init_thebelab_core)
 
+    # configuration for this tool
+    app.add_config_value("thebe_config", {}, "html")
     app.add_directive("thebe-button", ThebeLabButton)
 
     # Add relevant code to headers
