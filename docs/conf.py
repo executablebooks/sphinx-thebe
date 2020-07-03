@@ -94,9 +94,7 @@ html_theme_options = {
     "path_to_docs": "docs",
     "use_repository_button": True,
     "use_issues_button": True,
-    "launch_buttons": {
-        "thebelab": True
-    }
+    "launch_buttons": {"thebelab": True},
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
