@@ -40,10 +40,11 @@ release = ""
 # ones.
 extensions = ["sphinx_thebelab", "sphinx_thebelab", "myst_parser"]
 
-thebelab_config = {
+thebe_config = {
     "repository_url": "https://github.com/binder-examples/jupyter-stacks-datascience",
+    "path_to_docs": "docs",
     # "repository_branch": "master",
-    # "selector": ".thebelab",
+    # "selector": ".thebe",
     # "selector_input": ,
     # "selector_output": ,
     # "codemirror-theme": "blackboard"  # Doesn't currently work
@@ -94,7 +95,7 @@ html_theme = "alabaster"
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ["_static"]
+# html_static_path = ["_static"]
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.

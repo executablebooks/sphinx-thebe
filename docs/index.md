@@ -17,11 +17,11 @@ and [Binder](https://mybinder.org).
 For example, click the button below. Notice that the code block beneath becomes
 editable and runnable!
 
-```{thebelab-button} Launch thebelab
+```{thebe-button} Launch thebelab
 ```
 
 ```{code-block}
-:class: thebelab
+:class: thebe
 
 print("hi")
 ```
