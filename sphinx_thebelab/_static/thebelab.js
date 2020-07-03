@@ -49,10 +49,10 @@ var initThebelab = () => {
 
         // Find any cells with an initialization tag and ask ThebeLab to run them when ready
         if (data.status === "ready") {
-            var thebeInitCells = document.querySelectorAll('.thebe-init');
+            var thebeInitCells = document.querySelectorAll('.thebe-init, .tag_thebe-init');
             thebeInitCells.forEach((cell) => {
                 console.log("Initializing ThebeLab with cell: " + cell.id);
-                cell.querySelector('.thebe-run-button').click();
+                cell.querySelector('.thebelab-run-button').click();
             });
         }
     });
