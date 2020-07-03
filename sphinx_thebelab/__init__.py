@@ -73,8 +73,12 @@ def update_thebelab_context(app, doctree, docname):
         cm_language = "r"
 
     # Create the URL for the kernel request
-    repo_url = config_thebe.get("repository_url", "https://github.com/binder-examples/jupyter-stacks-datascience")
+    repo_url = config_thebe.get(
+        "repository_url",
+        "https://github.com/binder-examples/jupyter-stacks-datascience",
+    )
     branch = config_thebe.get("repository_branch", "master")
+    path_to_docs = config_thebe.get("path_to_docs", ".").strip("/") + "/"
     org, repo = _split_repo_url(repo_url)
 
     # Update the doctree with some nodes for the thebelab configuration
@@ -92,7 +96,7 @@ def update_thebelab_context(app, doctree, docname):
         }},
         kernelOptions: {{
             kernelName: "{kernel_name}",
-            path: "{str(Path(docname).parent)}"
+            path: "{path_to_docs}{str(Path(docname).parent)}"
         }},
         predefinedOutput: true
     }}

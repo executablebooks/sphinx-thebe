@@ -6,7 +6,7 @@ thebe-kernel: ir
 
 ## Change the HTML selector to mark interactive cells
 
-By default, `sphinx-thebelab` will be run on any cells with the `thebelab` class.
+By default, `sphinx-thebelab` will be run on any cells with the `thebe` class.
 However, you can customize the HTML selector to use other classes, elements, etc.
 
 For example, if you wanted to convert **all code cells**, you could use the following
@@ -36,7 +36,7 @@ code and Thebelab will detect it.
 For example, the following code:
 
 `````
-````{container} thebelab
+````{container} thebe
 ```{code-block} r
 print("hi")
 ```
@@ -50,7 +50,7 @@ print("hi")
 Defines a *parent container* in which we'll put both code and the output of the
 code. We'll use a `code-block` for the code, and another `container` node with our
 `output` class for the output. `sphinx-gallery` will detect the parent container because
-it has a `thebelab` class. It will detect the `pre` block inside the container as the
+it has a `thebe` class. It will detect the `pre` block inside the container as the
 code, and it will detect the `<div>` block with the `output` class as the output.
 
 The result is that initializing Thebelab *retains* the output until the cell is
@@ -59,7 +59,7 @@ executed, like so:
 ```{thebe-button}
 ```
 
-````{container} thebelab
+````{container} thebe
 ```{code-block} r
 print("hi")
 ```
@@ -88,7 +88,7 @@ In addition, this website is configured to use the [Binder R example repository]
 for its environment. As a result, we can now run R code interactively with Thebelab:
 
 
-```{thebe-button}
+```{thebe-button} Launch thebelab in R
 ```
 
 ```{code-block}
