@@ -7,7 +7,7 @@ import json
 
 from pathlib import Path
 
-__version__ = "0.0.6dev0"
+__version__ = "0.0.5dev0"
 
 logger = logging.getLogger(__name__)
 
@@ -22,11 +22,12 @@ def init_thebe_default_config(app, env, docnames):
     defaults = {
         "selector": ".thebe",
         "selector_input": "pre",
-        "selector_output": ".output"
+        "selector_output": ".output",
     }
     for key, val in defaults.items():
         if key not in thebe_config:
             thebe_config[key] = val
+
 
 def init_thebelab_core(app, env):
     config_thebe = app.config["thebe_config"]

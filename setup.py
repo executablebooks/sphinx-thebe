@@ -23,13 +23,11 @@ setup(
     url="https://github.com/executablebooks/sphinx-thebelab",
     license="MIT License",
     packages=find_packages(),
-    package_data={
-        "sphinx_thebelab": [
-            "_static/thebelab.css",
-            "_static/thebelab.js",
-        ]
-    },
+    package_data={"sphinx_thebelab": ["_static/thebelab.css", "_static/thebelab.js",]},
     classifiers=["License :: OSI Approved :: MIT License"],
     install_requires=["sphinx>=1.8"],
-    extras_require={"sphinx": ["myst-parser[sphinx]"], "testing": ["pytest", "pytest-regressions", "beautifulsoup4"]},
+    extras_require={
+        "sphinx": ["myst-parser[sphinx]", "sphinx-book-theme"],
+        "testing": ["pytest", "pytest-regressions", "beautifulsoup4"],
+    },
 )

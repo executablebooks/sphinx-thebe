@@ -54,7 +54,9 @@ def test_sphinx_thebelab(file_regression, sphinx_build):
     file_regression.check(config.prettify(), basename="config_index", extension=".html")
 
     # Testing the configure page which has a custom kernel
-    soup_conf = BeautifulSoup(Path(sphinx_build.path_pg_config).read_text(), "html.parser")
+    soup_conf = BeautifulSoup(
+        Path(sphinx_build.path_pg_config).read_text(), "html.parser"
+    )
     config = soup_conf("script", {"type": "text/x-thebe-config"})
     assert len(config) == 1
     config = config[0]
