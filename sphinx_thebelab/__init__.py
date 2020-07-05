@@ -196,7 +196,8 @@ def setup(app):
 
     # configuration for this tool
     app.add_config_value("thebe_config", {}, "html")
-    app.add_directive("thebe-button", ThebeLabButton)
+    # override=True in case Jupyter Sphinx has already been loaded
+    app.add_directive("thebe-button", ThebeLabButton, override=True)
 
     # Add relevant code to headers
     app.add_css_file("thebelab.css")
