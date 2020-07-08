@@ -20,7 +20,7 @@ editable and runnable!
 ```{thebe-button} Launch thebelab
 ```
 
-```{code-block}
+```{code-block} python
 :class: thebe
 
 print("hi")
@@ -39,9 +39,7 @@ by a kernel.
 To install `sphinx-thebelab` first clonse and install it:
 
 ```
-git clone https://github.com/executablebooks/sphinx-thebelab
-cd sphinx-thebelab
-pip install -e .
+pip install sphinx-thebelab
 ```
 
 Then, add it to your Sphinx site's `conf.py` file:
@@ -64,4 +62,5 @@ For more information on using `sphinx-thebelab`, see [](use.md).
 :hidden:
 use
 configure
+examples/rst
 ```
