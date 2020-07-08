@@ -6,6 +6,12 @@ There are two steps to using `sphinx-thebelab`. First, you must mark certain
 parts of your page as "ready for thebelab". Next, you must insert a button onto
 the page to tell Thebelab to initialize.
 
+```{tip}
+The examples on this page use a flavor of markdown called [MyST Markdown](https://myst-parser.readthedocs.io/en/latest/).
+However you can also use reStructuredText with `sphinx-thebelab` in the same way. See
+[](examples/rst) for some tips.
+```
+
 ### Mark elements for thebelab
 
 By default, thebelab will be run on any elements in your documentation that contain
