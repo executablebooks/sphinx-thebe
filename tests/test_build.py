@@ -40,7 +40,7 @@ def sphinx_build(tmpdir_factory):
 
 
 def test_sphinx_thebe(file_regression, sphinx_build):
-    """Test building with thebelab."""
+    """Test building with thebe."""
     sphinx_build.copy()
 
     # Basic build with defaults

@@ -29,10 +29,10 @@ def init_thebe_default_config(app, env, docnames):
             thebe_config[key] = val
 
 
-def init_thebelab_core(app, env):
+def init_thebe_core(app, env):
     config_thebe = app.config["thebe_config"]
     if not config_thebe:
-        logger.warning("Didn't find `thebe_config` in conf.py, add to use thebelab")
+        logger.warning("Didn't find `thebe_config` in conf.py, add to use thebe")
         return
 
     # Add core libraries
@@ -46,11 +46,11 @@ def init_thebelab_core(app, env):
         const thebe_selector_output = "{ app.config.thebe_config['selector_output'] }"
     """
     app.add_js_file(None, body=thebe_config)
-    app.add_js_file(filename="thebelab.js", **opts)
+    app.add_js_file(filename="sphinx-thebe.js", **opts)
 
 
-def update_thebelab_context(app, doctree, docname):
-    """Add thebelab config nodes to this doctree."""
+def update_thebe_context(app, doctree, docname):
+    """Add thebe config nodes to this doctree."""
     config_thebe = app.config["thebe_config"]
     if not config_thebe:
         return
@@ -60,11 +60,11 @@ def update_thebelab_context(app, doctree, docname):
         config_thebe = {}
     if not isinstance(config_thebe, dict):
         raise ValueError(
-            "thebelab configuration must be `True` or a dictionary for configuration."
+            "thebe configuration must be `True` or a dictionary for configuration."
         )
     codemirror_theme = config_thebe.get("codemirror-theme", "abcdef")
 
-    # Thebelab configuration
+    # Thebe configuration
     # Choose the kernel we'll use
     meta = app.env.metadata.get(docname, {})
     kernel_name = meta.get("thebe-kernel")
@@ -90,8 +90,8 @@ def update_thebelab_context(app, doctree, docname):
     path_to_docs = config_thebe.get("path_to_docs", ".").strip("/") + "/"
     org, repo = _split_repo_url(repo_url)
 
-    # Update the doctree with some nodes for the thebelab configuration
-    thebelab_html_config = f"""
+    # Update the doctree with some nodes for the thebe configuration
+    thebe_html_config = f"""
     <script type="text/x-thebe-config">
     {{
         requestKernel: true,
@@ -112,7 +112,7 @@ def update_thebelab_context(app, doctree, docname):
     </script>
     """
 
-    doctree.append(nodes.raw(text=thebelab_html_config, format="html"))
+    doctree.append(nodes.raw(text=thebe_html_config, format="html"))
     doctree.append(
         nodes.raw(text=f"<script>kernelName = '{kernel_name}'</script>", format="html")
     )
@@ -124,17 +124,17 @@ def _split_repo_url(url):
         end = url.split("github.com/")[-1]
         org, repo = end.split("/")[:2]
     else:
-        logger.warning(f"Currently Thebelab repositories must be on GitHub, got {url}")
+        logger.warning(f"Currently Thebe repositories must be on GitHub, got {url}")
         org = repo = None
     return org, repo
 
 
-class ThebeLabButtonNode(nodes.Element):
+class ThebeButtonNode(nodes.Element):
     """Appended to the doctree by the ThebeButton directive
 
-    Renders as a button to enable thebelab on the page.
+    Renders as a button to enable thebe on the page.
 
-    If no ThebeButton directive is found in the document but thebelab
+    If no ThebeButton directive is found in the document but thebe
     is enabled, the node is added at the bottom of the document.
     """
 
@@ -145,12 +145,12 @@ class ThebeLabButtonNode(nodes.Element):
         text = self["text"]
         return (
             '<button title="{text}" class="thebelab-button thebe-launch-button"'
-            'onclick="initThebelab()">{text}</button>'.format(text=text)
+            'onclick="initThebe()">{text}</button>'.format(text=text)
         )
 
 
-class ThebeLabButton(Directive):
-    """Specify a button to activate thebelab on the page
+class ThebeButton(Directive):
+    """Specify a button to activate thebe on the page
 
     Arguments
     ---------
@@ -168,7 +168,7 @@ class ThebeLabButton(Directive):
 
     def run(self):
         kwargs = {"text": self.arguments[0]} if self.arguments else {}
-        return [ThebeLabButtonNode(**kwargs)]
+        return [ThebeButtonNode(**kwargs)]
 
 
 # Used to render an element node as HTML
@@ -190,22 +190,22 @@ def setup(app):
     # Set default values for the configuration
     app.connect("env-before-read-docs", init_thebe_default_config)
 
-    # Include Thebelab core docs
-    app.connect("doctree-resolved", update_thebelab_context)
-    app.connect("env-updated", init_thebelab_core)
+    # Include Thebe core docs
+    app.connect("doctree-resolved", update_thebe_context)
+    app.connect("env-updated", init_thebe_core)
 
     # configuration for this tool
     app.add_config_value("thebe_config", {}, "html")
     # override=True in case Jupyter Sphinx has already been loaded
-    app.add_directive("thebe-button", ThebeLabButton, override=True)
+    app.add_directive("thebe-button", ThebeButton, override=True)
 
     # Add relevant code to headers
-    app.add_css_file("thebelab.css")
+    app.add_css_file("sphinx-thebe.css")
 
-    # ThebeLabButtonNode is the button that activates thebelab
+    # ThebeButtonNode is the button that activates thebe
     # and is only rendered for the HTML builder
     app.add_node(
-        ThebeLabButtonNode,
+        ThebeButtonNode,
         html=(visit_element_html, None),
         latex=(skip, None),
         textinfo=(skip, None),

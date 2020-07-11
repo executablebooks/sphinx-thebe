@@ -3,8 +3,8 @@
 ## Get started
 
 There are two steps to using `sphinx-thebe`. First, you must mark certain
-parts of your page as "ready for thebelab". Next, you must insert a button onto
-the page to tell Thebelab to initialize.
+parts of your page as "ready for thebe". Next, you must insert a button onto
+the page to tell Thebe to initialize.
 
 ```{tip}
 The examples on this page use a flavor of markdown called [MyST Markdown](https://myst-parser.readthedocs.io/en/latest/).
@@ -12,10 +12,10 @@ However you can also use reStructuredText with `sphinx-thebe` in the same way. S
 [](examples/rst) for some tips.
 ```
 
-### Mark elements for thebelab
+### Mark elements for thebe
 
-By default, thebelab will be run on any elements in your documentation that contain
-the class `thebelab` and that have a `<pre`> element underneath them.
+By default, thebe will be run on any elements in your documentation that contain
+the class `thebe` and that have a `<pre`> element underneath them.
 
 ```{note}
 This documentation is written in [MyST Markdown](https://myst-parser.readthedocs.io),
@@ -32,7 +32,7 @@ You can add code blocks like so:
 ````
 
 By default, `sphinx-thebe` will look for any HTML `<pre>` element *inside* the code
-block. Thebelab will run on that element.
+block. Thebe will run on that element.
 
 ### Add an activate button to your page
 
@@ -49,7 +49,7 @@ The button looks like this:
 ```{thebe-button}
 ```
 
-Clicking this button will activate Thebelab on the page. If you'd like to manually
+Clicking this button will activate Thebe on the page. If you'd like to manually
 add your own button (e.g. with your own extension or theme), see [](add-custom-button).
 
 ```{note}

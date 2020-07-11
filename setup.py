@@ -23,7 +23,7 @@ setup(
     url="https://github.com/executablebooks/sphinx-thebe",
     license="MIT License",
     packages=find_packages(),
-    package_data={"sphinx_thebe": ["_static/thebelab.css", "_static/thebelab.js",]},
+    package_data={"sphinx_thebe": ["_static/sphinx-thebe.css", "_static/sphinx-thebe.js",]},
     classifiers=["License :: OSI Approved :: MIT License"],
     install_requires=["sphinx>=1.8"],
     extras_require={

@@ -11,13 +11,13 @@
 :alt: PyPi page
 ```
 
-Make your code cells interactive with a kernel provided by [Thebelab](http://thebelab.readthedocs.org/)
+Make your code cells interactive with a kernel provided by [Thebe](http://thebelab.readthedocs.org/)
 and [Binder](https://mybinder.org).
 
 For example, click the button below. Notice that the code block beneath becomes
 editable and runnable!
 
-```{thebe-button} Launch thebelab
+```{thebe-button} Launch thebe
 ```
 
 ```{code-block} python
@@ -29,7 +29,7 @@ print("hi")
 See [](use.md) for more information about what you can do with `sphinx-thebe`.
 
 ```{note}
-This package is a Sphinx wrapper around the excellent [thebelab project](http://thebelab.readthedocs.org/),
+This package is a Sphinx wrapper around the excellent [thebe project](http://thebelab.readthedocs.org/),
 a javascript tool to convert static code cells into interactive cells backed
 by a kernel.
 ```
