@@ -19,7 +19,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = "Sphinx Thebelab"
+project = "Sphinx Thebe"
 copyright = "2020, Executable Book Project"
 author = "Executable Book Project"
 
@@ -38,7 +38,7 @@ release = ""
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ["sphinx_thebelab", "myst_parser"]
+extensions = ["jupyter_sphinx", "sphinx_thebe", "myst_parser"]
 
 thebe_config = {
     "repository_url": "https://github.com/binder-examples/jupyter-stacks-datascience",
@@ -90,7 +90,7 @@ html_theme = "sphinx_book_theme"
 # documentation.
 #
 html_theme_options = {
-    "repository_url": "https://github.com/executablebooks/sphinx-thebelab",
+    "repository_url": "https://github.com/executablebooks/sphinx-thebe",
     "path_to_docs": "docs",
     "use_repository_button": True,
     "use_issues_button": True,

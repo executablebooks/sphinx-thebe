@@ -6,7 +6,7 @@ thebe-kernel: ir
 
 ## Change the HTML selector to mark interactive cells
 
-By default, `sphinx-thebelab` will be run on any cells with the `thebe` class.
+By default, `sphinx-thebe` will be run on any cells with the `thebe` class.
 However, you can customize the HTML selector to use other classes, elements, etc.
 
 For example, if you wanted to convert **all code cells**, you could use the following
@@ -19,7 +19,7 @@ thebe_config = {
 ```
 
 ```{note}
-`sphinx-thebelab` will subsequently look for any `pre` blocks inside of elements it
+`sphinx-thebe` will subsequently look for any `pre` blocks inside of elements it
 finds with the `selector` configuration value. These are the blocks that will be
 converted to interactive with `thebelab`.
 ```
@@ -27,7 +27,7 @@ converted to interactive with `thebelab`.
 ## Including outputs with your code
 
 If you'd like to include outputs in the *static* version of your page, and only
-overwrite them once the user has run that Thebelab cell, you can configure `sphinx-thebelab`
+overwrite them once the user has run that Thebelab cell, you can configure `sphinx-thebe`
 to detect and keep the outputs associated with some code. To do so, use
 the `selector_output` configuration. This is a selector that is searched for *within* any
 items discovered by `selector`. If an output is found, it will be placed just after the
@@ -167,7 +167,7 @@ directive:
 
 ## Choose a codemirror theme
 
-You can customize `sphinx-thebelab` to use the codemirror theme of your choice.
+You can customize `sphinx-thebe` to use the codemirror theme of your choice.
 To do so, use the following configuration:
 
 ```
@@ -182,7 +182,7 @@ of themes that you can use, and what they look like.
 
 ## Configuration reference
 
-Here's a reference of all of the configuration values avialable to `sphinx-thebelab`.
+Here's a reference of all of the configuration values avialable to `sphinx-thebe`.
 Many of these eventually make their was into the `thebelab` configuration. You can
 find a [reference for `thebelab` configuration here](https://thebelab.readthedocs.io/en/latest/config_reference.html).
 
