@@ -1,18 +1,18 @@
-# sphinx-thebelab
+# sphinx-thebe
 
-[![Documentation](https://readthedocs.org/projects/sphinx-thebelab/badge/?version=latest)](https://sphinx-thebelab.readthedocs.io/en/latest/?badge=latest)
-[![PyPI](https://img.shields.io/pypi/v/sphinx-thebelab.svg)](https://pypi.org/project/sphinx-thebelab)
+[![Documentation](https://readthedocs.org/projects/sphinx-thebe/badge/?version=latest)](https://sphinx-thebe.readthedocs.io/en/latest/?badge=latest)
+[![PyPI](https://img.shields.io/pypi/v/sphinx-thebe.svg)](https://pypi.org/project/sphinx-thebe)
 
 Integrate interactive code blocks into your documentation with Thebelab and Binder.
 
-See [the sphinx-thebelab documentation](https://sphinx-thebelab.readthedocs.io/en/latest/) for more details!
+See [the sphinx-thebe documentation](https://sphinx-thebe.readthedocs.io/en/latest/) for more details!
 
 ## Install
 
-To install `sphinx-thebelab` first clonse and install it:
+To install `sphinx-thebe` first clonse and install it:
 
 ```
-pip install sphinx-thebelab
+pip install sphinx-thebe
 ```
 
 Then, add it to your Sphinx site's `conf.py` file:
@@ -20,9 +20,9 @@ Then, add it to your Sphinx site's `conf.py` file:
 ```
 extensions = [
     ...
-    "sphinx_thebelab"
+    "sphinx_thebe"
     ...
 ]
 ```
 
-See [the sphinx-thebelab documentation](https://sphinx-thebelab.readthedocs.io/en/latest/) for more details!
+See [the sphinx-thebe documentation](https://sphinx-thebe.readthedocs.io/en/latest/) for more details!

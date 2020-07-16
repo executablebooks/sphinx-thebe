@@ -1,21 +1,21 @@
-# Using `sphinx-thebelab`
+# Using `sphinx-thebe`
 
 ## Get started
 
-There are two steps to using `sphinx-thebelab`. First, you must mark certain
-parts of your page as "ready for thebelab". Next, you must insert a button onto
-the page to tell Thebelab to initialize.
+There are two steps to using `sphinx-thebe`. First, you must mark certain
+parts of your page as "ready for thebe". Next, you must insert a button onto
+the page to tell Thebe to initialize.
 
 ```{tip}
 The examples on this page use a flavor of markdown called [MyST Markdown](https://myst-parser.readthedocs.io/en/latest/).
-However you can also use reStructuredText with `sphinx-thebelab` in the same way. See
+However you can also use reStructuredText with `sphinx-thebe` in the same way. See
 [](examples/rst) for some tips.
 ```
 
-### Mark elements for thebelab
+### Mark elements for thebe
 
-By default, thebelab will be run on any elements in your documentation that contain
-the class `thebelab` and that have a `<pre`> element underneath them.
+By default, thebe will be run on any elements in your documentation that contain
+the class `thebe` and that have a `<pre`> element underneath them.
 
 ```{note}
 This documentation is written in [MyST Markdown](https://myst-parser.readthedocs.io),
@@ -31,8 +31,8 @@ You can add code blocks like so:
 ```
 ````
 
-By default, `sphinx-thebelab` will look for any HTML `<pre>` element *inside* the code
-block. Thebelab will run on that element.
+By default, `sphinx-thebe` will look for any HTML `<pre>` element *inside* the code
+block. Thebe will run on that element.
 
 ### Add an activate button to your page
 
@@ -49,20 +49,20 @@ The button looks like this:
 ```{thebe-button}
 ```
 
-Clicking this button will activate Thebelab on the page. If you'd like to manually
+Clicking this button will activate Thebe on the page. If you'd like to manually
 add your own button (e.g. with your own extension or theme), see [](add-custom-button).
 
 ```{note}
-By default, `sphinx-thebelab` will serve the Binder environment for the
+By default, `sphinx-thebe` will serve the Binder environment for the
 [jupyter-stacks-datascience repository](https://github.com/binder-examples/jupyter-stacks-datascience).
 See [](configure.md) for information on choosing your own environment.
 ```
 
-## What can I do with `sphinx-thebelab`?
+## What can I do with `sphinx-thebe`?
 
-`sphinx-thebelab` uses Jupyter kernels to execute your page's code and return the
+`sphinx-thebe` uses Jupyter kernels to execute your page's code and return the
 results, and Binder in order to run the infrastructure for execution. This means that
-you can do nearly anything with `sphinx-thebelab` that you could do from within a
+you can do nearly anything with `sphinx-thebe` that you could do from within a
 Jupyter Notebook cell.
 
 ```{admonition} You can customize your environment
@@ -110,10 +110,10 @@ plt.scatter(*data, c=data[0], s=200)
 ### Interactive outputs
 
 Interactive outputs are still a little bit flaky, but please try out
-`sphinx-thebelab` with the interactive visualization library of your choice,
+`sphinx-thebe` with the interactive visualization library of your choice,
 and report back how things work!
 
-As a general rule, `sphinx-thebelab` will only work with interactive libraries
+As a general rule, `sphinx-thebe` will only work with interactive libraries
 that are able to output self-contained bundles of HTML/JS that work on their own.
 Many Jupyter environments have libraries pre-loaded, and that will not be the case
-with `sphinx-thebelab`.
+with `sphinx-thebe`.

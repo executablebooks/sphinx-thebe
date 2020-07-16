@@ -1,23 +1,23 @@
-# sphinx-thebelab
+# sphinx-thebe
 
 
-```{image} https://readthedocs.org/projects/sphinx-thebelab/badge/?version=latest
-:target: https://sphinx-thebelab.readthedocs.io/en/latest/?badge=latest
+```{image} https://readthedocs.org/projects/sphinx-thebe/badge/?version=latest
+:target: https://sphinx-thebe.readthedocs.io/en/latest/?badge=latest
 :alt: Documentation
 ```
 
-```{image} https://img.shields.io/pypi/v/sphinx-thebelab.svg
-:target: https://pypi.org/project/sphinx_thebelab
+```{image} https://img.shields.io/pypi/v/sphinx-thebe.svg
+:target: https://pypi.org/project/sphinx_thebe
 :alt: PyPi page
 ```
 
-Make your code cells interactive with a kernel provided by [Thebelab](http://thebelab.readthedocs.org/)
+Make your code cells interactive with a kernel provided by [Thebe](http://thebelab.readthedocs.org/)
 and [Binder](https://mybinder.org).
 
 For example, click the button below. Notice that the code block beneath becomes
 editable and runnable!
 
-```{thebe-button} Launch thebelab
+```{thebe-button} Launch thebe
 ```
 
 ```{code-block} python
@@ -26,20 +26,20 @@ editable and runnable!
 print("hi")
 ```
 
-See [](use.md) for more information about what you can do with `sphinx-thebelab`.
+See [](use.md) for more information about what you can do with `sphinx-thebe`.
 
 ```{note}
-This package is a Sphinx wrapper around the excellent [thebelab project](http://thebelab.readthedocs.org/),
+This package is a Sphinx wrapper around the excellent [thebe project](http://thebelab.readthedocs.org/),
 a javascript tool to convert static code cells into interactive cells backed
 by a kernel.
 ```
 
 ## Install
 
-To install `sphinx-thebelab` first clonse and install it:
+To install `sphinx-thebe` first clonse and install it:
 
 ```
-pip install sphinx-thebelab
+pip install sphinx-thebe
 ```
 
 Then, add it to your Sphinx site's `conf.py` file:
@@ -47,16 +47,16 @@ Then, add it to your Sphinx site's `conf.py` file:
 ```
 extensions = [
     ...
-    "sphinx_thebelab"
+    "sphinx_thebe"
     ...
 ]
 ```
 
 ## Configure and use
 
-For more information about how to configure `sphinx-thebelab`, see [](configure.md).
+For more information about how to configure `sphinx-thebe`, see [](configure.md).
 
-For more information on using `sphinx-thebelab`, see [](use.md).
+For more information on using `sphinx-thebe`, see [](use.md).
 
 ```{toctree}
 :hidden:
