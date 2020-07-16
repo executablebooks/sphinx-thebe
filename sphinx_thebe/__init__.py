@@ -211,6 +211,7 @@ def setup(app):
         textinfo=(skip, None),
         text=(skip, None),
         man=(skip, None),
+        override=True,
     )
 
     return {
