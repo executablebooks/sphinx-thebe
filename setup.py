@@ -27,7 +27,7 @@ setup(
     classifiers=["License :: OSI Approved :: MIT License"],
     install_requires=["sphinx>=1.8"],
     extras_require={
-        "sphinx": ["myst-parser[sphinx]", "sphinx-book-theme"],
+        "sphinx": ["myst-parser[sphinx]", "sphinx-book-theme", "jupyter-sphinx"],
         "testing": ["pytest", "pytest-regressions", "beautifulsoup4"],
     },
 )
