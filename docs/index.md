@@ -62,5 +62,6 @@ For more information on using `sphinx-thebe`, see [](use.md).
 :hidden:
 use
 configure
+contribute
 examples/rst
 ```
