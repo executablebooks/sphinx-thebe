@@ -49,6 +49,26 @@ def init_thebe_core(app, env):
     app.add_js_file(filename="sphinx-thebe.js", **opts)
 
 
+def remove_thebe_if_not_needed(app, pagename, templatename, context, doctree):
+    if not doctree:
+        return
+
+    if not doctree.traverse(ThebeButtonNode):
+        # Remove thebe JS files
+        new_script_files = []
+        for ii in context["script_files"]:
+            if ii not in ["_static/sphinx-thebe.js", "https://unpkg.com/thebelab@latest/lib/index.js"]:
+                new_script_files.append(ii)
+        context["script_files"] = new_script_files
+
+        # Remove thebe CSS files
+        new_css_files = []
+        for ii in context["css_files"]:
+            if ii not in ['_static/thebelab.css', '_static/sphinx-thebe.css']:
+                new_css_files.append(ii)
+        context["css_files"] = new_css_files
+
+
 def update_thebe_context(app, doctree, docname):
     """Add thebe config nodes to this doctree."""
     config_thebe = app.config["thebe_config"]
@@ -193,6 +213,8 @@ def setup(app):
     # Include Thebe core docs
     app.connect("doctree-resolved", update_thebe_context)
     app.connect("env-updated", init_thebe_core)
+
+    app.connect("html-page-context", remove_thebe_if_not_needed)
 
     # configuration for this tool
     app.add_config_value("thebe_config", {}, "html")
