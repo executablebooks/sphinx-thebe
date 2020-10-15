@@ -16,7 +16,7 @@ version = line.split(" = ")[-1].strip('"')
 setup(
     name="sphinx-thebe",
     version=version,
-    description="Add a copy button to each of your code cells.",
+    description="Integrate interactive code blocks into your documentation with Thebe and Binder.",
     long_description=readme_text,
     long_description_content_type="text/markdown",
     author="Executable Book Project",
