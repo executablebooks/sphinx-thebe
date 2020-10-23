@@ -38,7 +38,7 @@ release = ""
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ["jupyter_sphinx", "sphinx_thebe", "myst_parser"]
+extensions = ["jupyter_sphinx", "sphinx_thebe", "myst_parser", "sphinx_panels"]
 
 thebe_config = {
     "repository_url": "https://github.com/binder-examples/jupyter-stacks-datascience",
@@ -120,6 +120,7 @@ copybutton_prompt_text = ">>> "
 # copybutton_image_path = "test/TEST_COPYBUTTON.png"
 # copybutton_selector = "div"
 
+panels_add_bootstrap_css = False
 
 # -- Options for HTMLHelp output ---------------------------------------------
 
