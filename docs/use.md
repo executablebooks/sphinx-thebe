@@ -6,22 +6,14 @@ There are two steps to using `sphinx-thebe`. First, you must mark certain
 parts of your page as "ready for thebe". Next, you must insert a button onto
 the page to tell Thebe to initialize.
 
-```{tip}
-The examples on this page use a flavor of markdown called [MyST Markdown](https://myst-parser.readthedocs.io/en/latest/).
-However you can also use reStructuredText with `sphinx-thebe` in the same way. See
-[](examples/rst) for some tips.
-```
+:::{admonition,tip} Using reStructuredText vs. MyST Markdown
+The examples on this page use **MyST Markdown syntax**, a form of markdown that works with Sphinx directives. You can also use reStructuredText if you wish. For information about reStructuredText vs. MyST Markdown, see [the MyST Parser documentation](https://myst-parser.readthedocs.io/en/latest/using/syntax.html) as well as [](examples/rst) for some tips.
+:::
 
 ### Mark elements for thebe
 
 By default, thebe will be run on any elements in your documentation that contain
 the class `thebe` and that have a `<pre`> element underneath them.
-
-```{note}
-This documentation is written in [MyST Markdown](https://myst-parser.readthedocs.io),
-so the syntax for writing directives looks different from reStructuredText. However,
-rST works just fine as well.
-```
 
 You can add code blocks like so:
 
@@ -107,13 +99,15 @@ import matplotlib.pyplot as plt
 plt.scatter(*data, c=data[0], s=200)
 ```
 
-### Interactive outputs
+## Interactive outputs
 
-Interactive outputs are still a little bit flaky, but please try out
-`sphinx-thebe` with the interactive visualization library of your choice,
-and report back how things work!
+Interactive outputs work with `sphinx-thebe` **if their web dependencies are loaded**.
 
-As a general rule, `sphinx-thebe` will only work with interactive libraries
-that are able to output self-contained bundles of HTML/JS that work on their own.
-Many Jupyter environments have libraries pre-loaded, and that will not be the case
-with `sphinx-thebe`.
+Many interactive libraries assume that some javascript packages are pre-loaded in a notebook environment. For example, both Jupyter Lab and Notebook come bundled with `require.js`. To use visualization libraries that depend on this, **you must load these libraries on your own in Sphinx**. To do so, you can add the following to your `conf.py`:
+
+```python
+def setup(app):
+    app.add_js_file("url-of-package.js")
+```
+
+Note that some visualization libraries output *bundles of JavaScript/HTML* that will work out-of-the-box. You should consult the documentation of the library you wish to use in order to figure out how to configure it properly. See [the `thebe` examples](https://thebe.readthedocs.io/en/latest/) for examples of some popular visualization libraries.
