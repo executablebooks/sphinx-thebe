@@ -1,11 +1,12 @@
 """A small sphinx extension to add "copy" buttons to code blocks."""
+
+import json
 import os
-from sphinx.util import logging
+from pathlib import Path
+
 from docutils.parsers.rst import Directive, directives
 from docutils import nodes
-import json
-
-from pathlib import Path
+from sphinx.util import logging
 
 __version__ = "0.0.8dev0"
 
@@ -179,7 +180,7 @@ def visit_element_html(self, node):
 
 # Used for nodes that do not need to be rendered
 def skip(self, node):
-    raise docutils.nodes.SkipNode
+    raise nodes.SkipNode
 
 
 def setup(app):
