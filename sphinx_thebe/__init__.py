@@ -1,4 +1,4 @@
-"""A small sphinx extension to add "copy" buttons to code blocks."""
+"""A sphinx extension to enable interactive computations using thebe."""
 
 import json
 import os
