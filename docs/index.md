@@ -64,4 +64,5 @@ use
 configure
 contribute
 examples/rst
+changelog
 ```
