@@ -38,7 +38,7 @@ def init_thebe_core(app, env):
 
     # Add core libraries
     opts = {"async": "async"}
-    app.add_js_file(filename="https://unpkg.com/thebelab@latest/lib/index.js", **opts)
+    app.add_js_file(filename="https://unpkg.com/thebe@latest/lib/index.js", **opts)
 
     # Add configuration variables
     thebe_config = f"""
