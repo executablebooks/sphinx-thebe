@@ -38,7 +38,7 @@ release = ""
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ["jupyter_sphinx", "sphinx_thebe", "myst_parser", "sphinx_panels"]
+extensions = ["sphinx_thebe", "myst_parser", "sphinx_panels"]
 
 thebe_config = {
     "repository_url": "https://github.com/binder-examples/jupyter-stacks-datascience",
