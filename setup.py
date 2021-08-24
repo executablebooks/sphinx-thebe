@@ -27,7 +27,7 @@ setup(
         "sphinx_thebe": ["_static/sphinx-thebe.css", "_static/sphinx-thebe.js",]
     },
     classifiers=["License :: OSI Approved :: MIT License"],
-    install_requires=["sphinx>=1.8"],
+    install_requires=["sphinx>=3.5,<5"],
     extras_require={
         "sphinx": [
             "myst-parser[sphinx]",

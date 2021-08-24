@@ -6,7 +6,8 @@ There are two steps to using `sphinx-thebe`. First, you must mark certain
 parts of your page as "ready for thebe". Next, you must insert a button onto
 the page to tell Thebe to initialize.
 
-:::{admonition,tip} Using reStructuredText vs. MyST Markdown
+:::{admonition} Using reStructuredText vs. MyST Markdown
+:class: tip
 The examples on this page use **MyST Markdown syntax**, a form of markdown that works with Sphinx directives. You can also use reStructuredText if you wish. For information about reStructuredText vs. MyST Markdown, see [the MyST Parser documentation](https://myst-parser.readthedocs.io/en/latest/using/syntax.html) as well as [](examples/rst) for some tips.
 :::
 
