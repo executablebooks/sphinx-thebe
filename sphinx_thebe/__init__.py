@@ -12,6 +12,8 @@ __version__ = "0.0.9"
 
 logger = logging.getLogger(__name__)
 
+THEBE_VERSION = "0.5.1"
+
 
 def st_static_path(app):
     static_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "_static"))
@@ -51,7 +53,7 @@ def init_thebe_core(app, pagename, templatename, context, doctree):
 
     # Add core libraries
     opts = {"async": "async"}
-    app.add_js_file(filename="https://unpkg.com/thebe@latest/lib/index.js", **opts)
+    app.add_js_file(filename=f"https://unpkg.com/thebe@{THEBE_VERSION}/lib/index.js", **opts)
 
     # Add configuration variables
     thebe_config = f"""
