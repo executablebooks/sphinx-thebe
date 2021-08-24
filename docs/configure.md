@@ -173,7 +173,7 @@ By default, Thebe encourages users to use the `thebe-button` directive to
 insert a thebe button into their documentation. However, you can add your own
 buttons wherever you wish. Simply ensure that an HTML element has this attribute:
 
-```
+```js
 onclick="initThebe()"
 ```
 
@@ -193,7 +193,7 @@ directive:
 You can customize `sphinx-thebe` to use the codemirror theme of your choice.
 To do so, use the following configuration:
 
-```
+```python
 thebe_config = {
    "codemirror-theme": "<cm-theme>"
 }
@@ -202,6 +202,17 @@ thebe_config = {
 See [the CodeMirror theme demo](https://codemirror.net/demo/theme.html) for a list
 of themes that you can use, and what they look like.
 
+## Only load JS on certain pages
+
+By default, `sphinx-thebe` will load the JS/CSS from `thebe` on all of your documentation's pages.
+Alternatively, you may load `thebe` only on pages that use the `thebe-button` directive.
+To do so, use the following configuration:
+
+```python
+thebe_config = {
+   "always_load": False
+}
+```
 
 ## Configuration reference
 
@@ -209,8 +220,9 @@ Here's a reference of all of the configuration values avialable to `sphinx-thebe
 Many of these eventually make their was into the `thebe` configuration. You can
 find a [reference for `thebe` configuration here](https://thebelab.readthedocs.io/en/latest/config_reference.html).
 
-```
+```python
 thebe_config = {
+    "always_load": bool (default True)
     "repository_url": "<your-repo-url>",
     "repository_branch": "<your-repo-branch>",
     "selector": "<selector-for-code-cells>",

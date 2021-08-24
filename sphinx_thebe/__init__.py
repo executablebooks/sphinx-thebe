@@ -23,6 +23,7 @@ def st_static_path(app):
 def init_thebe_default_config(app, env, docnames):
     thebe_config = app.config.thebe_config
     defaults = {
+        "always_load": True,
         "selector": ".thebe",
         "selector_input": "pre",
         "selector_output": ".output",
@@ -32,23 +33,34 @@ def init_thebe_default_config(app, env, docnames):
             thebe_config[key] = val
 
 
-def _check_if_load_thebe(doctree, config_thebe):
-    """Decide whether to load thebe based on the page's context."""
-    # Only load `thebe` if there is a thebe button somewhere
-    if not doctree or (not doctree.traverse(ThebeButtonNode)):
-        return
+def _bool(b):
+    if isinstance(b, bool):
+        return b
+    else:
+        return b in ["true", "True"]
 
+
+def _do_load_thebe(doctree, config_thebe):
+    """Decide whether to load thebe based on the page's context."""
+    if not doctree:
+        return False
+
+    # If we aren't properly configured
     if not config_thebe:
         logger.warning("Didn't find `thebe_config` in conf.py, add to use thebe")
-        return
+        return False
 
-    return True
+    # Only load `thebe` if there is a thebe button somewhere
+    if doctree.traverse(ThebeButtonNode) or _bool(config_thebe.get("always_load")):
+        return True
+    else:
+        return False
 
 
 def init_thebe_core(app, pagename, templatename, context, doctree):
     """Load thebe assets if there's a thebe button on this page."""
     config_thebe = app.config["thebe_config"]
-    if not _check_if_load_thebe(doctree, config_thebe):
+    if not _do_load_thebe(doctree, config_thebe):
         return
 
     # Add core libraries
@@ -68,7 +80,7 @@ def init_thebe_core(app, pagename, templatename, context, doctree):
 def update_thebe_context(app, doctree, docname):
     """Add thebe config nodes to this doctree."""
     config_thebe = app.config["thebe_config"]
-    if not _check_if_load_thebe(doctree, config_thebe):
+    if not _do_load_thebe(doctree, config_thebe):
         return
 
     # Thebe configuration
@@ -208,11 +220,13 @@ def setup(app):
 
     # Update the doctree with thebe-specific information if needed
     app.connect("doctree-resolved", update_thebe_context)
+
     # Load the JS/CSS assets for thebe if needed    
     app.connect("html-page-context", init_thebe_core)
 
     # configuration for this tool
     app.add_config_value("thebe_config", {}, "html")
+
     # override=True in case Jupyter Sphinx has already been loaded
     app.add_directive("thebe-button", ThebeButton, override=True)
 
