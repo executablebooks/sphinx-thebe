@@ -30,10 +30,23 @@ def init_thebe_default_config(app, env, docnames):
             thebe_config[key] = val
 
 
-def init_thebe_core(app, env):
-    config_thebe = app.config["thebe_config"]
+def _check_if_load_thebe(doctree, config_thebe):
+    """Decide whether to load thebe based on the page's context."""
+    # Only load `thebe` if there is a thebe button somewhere
+    if not doctree or (not doctree.traverse(ThebeButtonNode)):
+        return
+
     if not config_thebe:
         logger.warning("Didn't find `thebe_config` in conf.py, add to use thebe")
+        return
+
+    return True
+
+
+def init_thebe_core(app, pagename, templatename, context, doctree):
+    """Load thebe assets if there's a thebe button on this page."""
+    config_thebe = app.config["thebe_config"]
+    if not _check_if_load_thebe(doctree, config_thebe):
         return
 
     # Add core libraries
@@ -53,7 +66,7 @@ def init_thebe_core(app, env):
 def update_thebe_context(app, doctree, docname):
     """Add thebe config nodes to this doctree."""
     config_thebe = app.config["thebe_config"]
-    if not config_thebe:
+    if not _check_if_load_thebe(doctree, config_thebe):
         return
 
     # Thebe configuration
@@ -191,9 +204,10 @@ def setup(app):
     # Set default values for the configuration
     app.connect("env-before-read-docs", init_thebe_default_config)
 
-    # Include Thebe core docs
+    # Update the doctree with thebe-specific information if needed
     app.connect("doctree-resolved", update_thebe_context)
-    app.connect("env-updated", init_thebe_core)
+    # Load the JS/CSS assets for thebe if needed    
+    app.connect("html-page-context", init_thebe_core)
 
     # configuration for this tool
     app.add_config_value("thebe_config", {}, "html")
