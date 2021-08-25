@@ -65,7 +65,9 @@ def init_thebe_core(app, pagename, templatename, context, doctree):
 
     # Add core libraries
     opts = {"async": "async"}
-    app.add_js_file(filename=f"https://unpkg.com/thebe@{THEBE_VERSION}/lib/index.js", **opts)
+    app.add_js_file(
+        filename=f"https://unpkg.com/thebe@{THEBE_VERSION}/lib/index.js", **opts
+    )
 
     # Add configuration variables
     thebe_config = f"""
@@ -221,7 +223,7 @@ def setup(app):
     # Update the doctree with thebe-specific information if needed
     app.connect("doctree-resolved", update_thebe_context)
 
-    # Load the JS/CSS assets for thebe if needed    
+    # Load the JS/CSS assets for thebe if needed
     app.connect("html-page-context", init_thebe_core)
 
     # configuration for this tool

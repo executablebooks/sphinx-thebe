@@ -71,7 +71,9 @@ def test_sphinx_thebe(file_regression, sphinx_build):
     file_regression.check(lb_text, basename="launch_buttons", extension=".html")
 
     # Changelog has no thebe button directive, but should have the JS anyway
-    soup_chlg = BeautifulSoup(Path(sphinx_build.path_pg_chglg).read_text(), "html.parser")
+    soup_chlg = BeautifulSoup(
+        Path(sphinx_build.path_pg_chglg).read_text(), "html.parser"
+    )
     assert "https://unpkg.com/thebe" in soup_chlg.prettify()
 
 
@@ -86,5 +88,7 @@ def test_always_load(file_regression, sphinx_build):
     soup_ix = BeautifulSoup(Path(sphinx_build.path_pg_index).read_text(), "html.parser")
     assert "https://unpkg.com/thebe" in soup_ix.prettify()
     # Changelog has no thebe button directive, so shouldn't have JS
-    soup_chlg = BeautifulSoup(Path(sphinx_build.path_pg_chglg).read_text(), "html.parser")
+    soup_chlg = BeautifulSoup(
+        Path(sphinx_build.path_pg_chglg).read_text(), "html.parser"
+    )
     assert "https://unpkg.com/thebe" not in soup_chlg.prettify()
