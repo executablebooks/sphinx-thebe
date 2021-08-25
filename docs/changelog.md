@@ -9,7 +9,7 @@ This will save some load time on non-interactive pages.
 
 ### Enhancements made
 
-- ✨ IMPROVE: Conditionally load  on pages [#30](https://github.com/executablebooks/sphinx-thebe/pull/30) ([@choldgraf](https://github.com/choldgraf))
+- Option to conditionally load on pages, see [documentation for details](https://sphinx-thebe.readthedocs.io/en/latest/configure.html#only-load-js-on-certain-pages) [#30](https://github.com/executablebooks/sphinx-thebe/pull/30) ([@choldgraf](https://github.com/choldgraf))
 
 ### Other merged PRs
 
