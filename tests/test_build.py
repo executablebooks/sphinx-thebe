@@ -18,6 +18,7 @@ def sphinx_build(tmpdir_factory):
         path_html = path_build.joinpath("html")
         path_pg_index = path_html.joinpath("index.html")
         path_pg_config = path_html.joinpath("configure.html")
+        path_pg_chglg = path_html.joinpath("changelog.html")
         cmd_base = ["sphinx-build", ".", "_build/html", "-a", "-W"]
 
         def copy(self, path=None):
@@ -68,3 +69,26 @@ def test_sphinx_thebe(file_regression, sphinx_build):
     launch_buttons = soup_conf.select(".thebe-launch-button")
     lb_text = "\n\n".join([ii.prettify() for ii in launch_buttons])
     file_regression.check(lb_text, basename="launch_buttons", extension=".html")
+
+    # Changelog has no thebe button directive, but should have the JS anyway
+    soup_chlg = BeautifulSoup(
+        Path(sphinx_build.path_pg_chglg).read_text(), "html.parser"
+    )
+    assert "https://unpkg.com/thebe" in soup_chlg.prettify()
+
+
+def test_always_load(file_regression, sphinx_build):
+    """Test building with thebe."""
+    sphinx_build.copy()
+
+    # Basic build with defaults
+    sphinx_build.build(cmd=["-D", "thebe_config.always_load=false"])
+
+    # Thebe should be loaded on a page *with* the directive and not on pages w/o it
+    soup_ix = BeautifulSoup(Path(sphinx_build.path_pg_index).read_text(), "html.parser")
+    assert "https://unpkg.com/thebe" in soup_ix.prettify()
+    # Changelog has no thebe button directive, so shouldn't have JS
+    soup_chlg = BeautifulSoup(
+        Path(sphinx_build.path_pg_chglg).read_text(), "html.parser"
+    )
+    assert "https://unpkg.com/thebe" not in soup_chlg.prettify()
