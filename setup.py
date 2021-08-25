@@ -23,6 +23,7 @@ setup(
     url="https://github.com/executablebooks/sphinx-thebe",
     license="MIT License",
     packages=find_packages(),
+    include_package_data=True,
     package_data={
         "sphinx_thebe": ["_static/sphinx-thebe.css", "_static/sphinx-thebe.js",]
     },
