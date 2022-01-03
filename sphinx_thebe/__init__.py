@@ -58,25 +58,24 @@ def _do_load_thebe(doctree, config_thebe):
 
 
 def init_thebe_core(app, pagename, templatename, context, doctree):
-    """Load thebe assets if there's a thebe button on this page."""
+    """Load thebe assets if there's a thebe button on this page.
+    
+    We defer loading the `thebe` javascript bundle until bootstrap is called
+    in order to speed up page load times.
+    """
     config_thebe = app.config["thebe_config"]
     if not _do_load_thebe(doctree, config_thebe):
         return
 
-    # Add core libraries
-    opts = {"async": "async"}
-    app.add_js_file(
-        filename=f"https://unpkg.com/thebe@{THEBE_VERSION}/lib/index.js", **opts
-    )
-
     # Add configuration variables
     thebe_config = f"""
+        const THEBE_VERSION = "{ THEBE_VERSION }"
         const thebe_selector = "{ app.config.thebe_config['selector'] }"
         const thebe_selector_input = "{ app.config.thebe_config['selector_input'] }"
         const thebe_selector_output = "{ app.config.thebe_config['selector_output'] }"
     """
     app.add_js_file(None, body=thebe_config)
-    app.add_js_file(filename="sphinx-thebe.js", **opts)
+    app.add_js_file(filename="sphinx-thebe.js", **{"async": "async"})
 
 
 def update_thebe_context(app, doctree, docname):

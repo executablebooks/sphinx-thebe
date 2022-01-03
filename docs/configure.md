@@ -218,7 +218,7 @@ thebe_config = {
 
 Here's a reference of all of the configuration values avialable to `sphinx-thebe`.
 Many of these eventually make their was into the `thebe` configuration. You can
-find a [reference for `thebe` configuration here](https://thebelab.readthedocs.io/en/latest/config_reference.html).
+find a [reference for `thebe` configuration here](https://thebe.readthedocs.io/en/latest/config_reference.html).
 
 ```python
 thebe_config = {
