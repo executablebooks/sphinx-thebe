@@ -47,7 +47,8 @@ thebe_config = {
     # "selector": ".thebe",
     # "selector_input": ,
     # "selector_output": ,
-    # "codemirror-theme": "blackboard"  # Doesn't currently work
+    # "codemirror-theme": "blackboard",  # Doesn't currently work
+    # "always_load": True,  # To load thebe on every page
 }
 
 myst_enable_extensions = ["colon_fence"]
@@ -86,6 +87,7 @@ pygments_style = "sphinx"
 # a list of builtin themes.
 #
 html_theme = "sphinx_book_theme"
+html_title = "sphinx-thebe"
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the

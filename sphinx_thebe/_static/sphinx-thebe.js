@@ -76,17 +76,27 @@ var modifyDOMForThebe = () => {
 }
 
 var initThebe = () => {
-    // Load thebe dynamically so we can reduce page size
-    console.log("[sphinx-thebe]: Loading thebe from CDN...");
-    const script = document.createElement('script');
-    script.src = `https://unpkg.com/thebe@${THEBE_VERSION}/lib/index.js`;
-    document.head.appendChild(script);
-    // Runs once the script has finished loading
-    script.addEventListener('load', () => {
+    // Load thebe dynamically if it's not already loaded
+    if (typeof thebelab === "undefined") {
+        console.log("[sphinx-thebe]: Loading thebe from CDN...");
+        $(".thebe-launch-button ").text("Loading thebe from CDN...");
+        const script = document.createElement('script');
+        script.src = `https://unpkg.com/thebe@${THEBE_VERSION}/lib/index.js`;
+        document.head.appendChild(script);
+
+        // Runs once the script has finished loading
+        script.addEventListener('load', () => {
+            console.log("[sphinx-thebe]: Finished loading thebe from CDN...");
+            configureThebe();
+            modifyDOMForThebe();
+            thebelab.bootstrap();
+        });
+    } else {
+        console.log("[sphinx-thebe]: thebe already loaded, not loading from CDN...");
         configureThebe();
         modifyDOMForThebe();
         thebelab.bootstrap();
-    });
+    }
 }
 
 // Helper function to munge the language name

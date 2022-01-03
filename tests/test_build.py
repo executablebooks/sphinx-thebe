@@ -70,7 +70,7 @@ def test_sphinx_thebe(file_regression, sphinx_build):
     lb_text = "\n\n".join([ii.prettify() for ii in launch_buttons])
     file_regression.check(lb_text, basename="launch_buttons", extension=".html")
 
-    # Make sure thebe JS is not on pages (it should be loaded dynamically)
+    # Thebe JS should not be loaded by default (is loaded lazily)
     soup_chlg = BeautifulSoup(
         Path(sphinx_build.path_pg_chglg).read_text(), "html.parser"
     )
@@ -82,13 +82,8 @@ def test_always_load(file_regression, sphinx_build):
     sphinx_build.copy()
 
     # Basic build with defaults
-    sphinx_build.build(cmd=["-D", "thebe_config.always_load=false"])
+    sphinx_build.build(cmd=["-D", "thebe_config.always_load=true"])
 
-    # Thebe should be loaded on a page *with* the directive and not on pages w/o it
+    # Thebe should not 
     soup_ix = BeautifulSoup(Path(sphinx_build.path_pg_index).read_text(), "html.parser")
     assert "https://unpkg.com/thebe" in soup_ix.prettify()
-    # Changelog has no thebe button directive, so shouldn't have JS
-    soup_chlg = BeautifulSoup(
-        Path(sphinx_build.path_pg_chglg).read_text(), "html.parser"
-    )
-    assert "https://unpkg.com/thebe" not in soup_chlg.prettify()

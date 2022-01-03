@@ -3,6 +3,7 @@
 import json
 import os
 from pathlib import Path
+from textwrap import dedent
 
 from docutils.parsers.rst import Directive, directives
 from docutils import nodes
@@ -21,9 +22,10 @@ def st_static_path(app):
 
 
 def init_thebe_default_config(app, env, docnames):
+    """Create a default config for fields that aren't given by the user."""
     thebe_config = app.config.thebe_config
     defaults = {
-        "always_load": True,
+        "always_load": False,
         "selector": ".thebe",
         "selector_input": "pre",
         "selector_output": ".output",
@@ -31,6 +33,11 @@ def init_thebe_default_config(app, env, docnames):
     for key, val in defaults.items():
         if key not in thebe_config:
             thebe_config[key] = val
+    
+    # Standardize types for certain values
+    BOOL_KEYS = ["always_load"]
+    for key in BOOL_KEYS:
+        thebe_config[key] = _bool(thebe_config[key])
 
 
 def _bool(b):
@@ -42,45 +49,45 @@ def _bool(b):
 
 def _do_load_thebe(doctree, config_thebe):
     """Decide whether to load thebe based on the page's context."""
+    # No doctree means there's no page content at all
     if not doctree:
         return False
 
     # If we aren't properly configured
     if not config_thebe:
-        logger.warning("Didn't find `thebe_config` in conf.py, add to use thebe")
+        logger.warning("[sphinx-thebe]: Didn't find `thebe_config` in conf.py, add to use thebe")
         return False
-
-    # Only load `thebe` if there is a thebe button somewhere
-    if doctree.traverse(ThebeButtonNode) or _bool(config_thebe.get("always_load")):
-        return True
-    else:
-        return False
-
-
-def init_thebe_core(app, pagename, templatename, context, doctree):
-    """Load thebe assets if there's a thebe button on this page.
     
-    We defer loading the `thebe` javascript bundle until bootstrap is called
+    return True
+
+
+def init_thebe_core(app, env, docnames):
+    """Add scripts to configure thebe, and optionally add thebe itself.
+    
+    By default, defer loading the `thebe` JS bundle until bootstrap is called
     in order to speed up page load times.
     """
     config_thebe = app.config["thebe_config"]
-    if not _do_load_thebe(doctree, config_thebe):
-        return
 
     # Add configuration variables
-    thebe_config = f"""
+    thebe_config = f"""\
         const THEBE_VERSION = "{ THEBE_VERSION }"
         const thebe_selector = "{ app.config.thebe_config['selector'] }"
         const thebe_selector_input = "{ app.config.thebe_config['selector_input'] }"
         const thebe_selector_output = "{ app.config.thebe_config['selector_output'] }"
     """
-    app.add_js_file(None, body=thebe_config)
+    app.add_js_file(None, body=dedent(thebe_config))
     app.add_js_file(filename="sphinx-thebe.js", **{"async": "async"})
 
+    if config_thebe.get("always_load") is True:
+        # If we've got `always load` on, then load thebe on every page.
+        thebejs = f"https://unpkg.com/thebe@{THEBE_VERSION}/lib/index.js"
+        app.add_js_file(thebejs)
 
 def update_thebe_context(app, doctree, docname):
-    """Add thebe config nodes to this doctree."""
+    """Add thebe config nodes to this doctree using page-dependent information."""
     config_thebe = app.config["thebe_config"]
+    # Skip modifying the doctree if we don't need to load thebe
     if not _do_load_thebe(doctree, config_thebe):
         return
 
@@ -93,7 +100,6 @@ def update_thebe_context(app, doctree, docname):
         )
     codemirror_theme = config_thebe.get("codemirror-theme", "abcdef")
 
-    # Thebe configuration
     # Choose the kernel we'll use
     meta = app.env.metadata.get(docname, {})
     kernel_name = meta.get("thebe-kernel")
@@ -141,6 +147,7 @@ def update_thebe_context(app, doctree, docname):
     </script>
     """
 
+    # Append to the docutils doctree so it makes it into the build outputs
     doctree.append(nodes.raw(text=thebe_html_config, format="html"))
     doctree.append(
         nodes.raw(text=f"<script>kernelName = '{kernel_name}'</script>", format="html")
@@ -153,7 +160,7 @@ def _split_repo_url(url):
         end = url.split("github.com/")[-1]
         org, repo = end.split("/")[:2]
     else:
-        logger.warning(f"Currently Thebe repositories must be on GitHub, got {url}")
+        logger.warning(f"[sphinx-thebe]: Currently Thebe repositories must be on GitHub, got {url}")
         org = repo = None
     return org, repo
 
@@ -219,11 +226,11 @@ def setup(app):
     # Set default values for the configuration
     app.connect("env-before-read-docs", init_thebe_default_config)
 
+    # Load the JS/CSS assets for thebe if needed
+    app.connect("env-before-read-docs", init_thebe_core)
+
     # Update the doctree with thebe-specific information if needed
     app.connect("doctree-resolved", update_thebe_context)
-
-    # Load the JS/CSS assets for thebe if needed
-    app.connect("html-page-context", init_thebe_core)
 
     # configuration for this tool
     app.add_config_value("thebe_config", {}, "html")

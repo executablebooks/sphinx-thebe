@@ -202,15 +202,16 @@ thebe_config = {
 See [the CodeMirror theme demo](https://codemirror.net/demo/theme.html) for a list
 of themes that you can use, and what they look like.
 
-## Only load JS on certain pages
+## Load `thebe` automatically on all pages
 
-By default, `sphinx-thebe` will load the JS/CSS from `thebe` on all of your documentation's pages.
-Alternatively, you may load `thebe` only on pages that use the `thebe-button` directive.
-To do so, use the following configuration:
+By default, `sphinx-thebe` will lazily load the JS/CSS from `thebe` when the `sphinx-thebe` initialization button is pressed.
+This means that no Javascript is loaded until a person explicitly tries to start thebe, which reduces page load times.
+
+If you want `thebe` to be loaded on every page, in an "eager" fashion, you may do so with the following configuration:
 
 ```python
 thebe_config = {
-   "always_load": False
+   "always_load": True
 }
 ```
 
