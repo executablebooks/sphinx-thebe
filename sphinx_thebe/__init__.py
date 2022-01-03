@@ -12,7 +12,7 @@ __version__ = "0.0.10"
 
 logger = logging.getLogger(__name__)
 
-THEBE_VERSION = "0.5.1"
+THEBE_VERSION = "0.8.2"
 
 
 def st_static_path(app):
