@@ -70,8 +70,9 @@ def init_thebe_core(app, env, docnames):
     config_thebe = app.config["thebe_config"]
 
     # Add configuration variables
+    THEBE_JS_URL = f"https://unpkg.com/thebe@{THEBE_VERSION}/lib/index.js"
     thebe_config = f"""\
-        const THEBE_VERSION = "{ THEBE_VERSION }"
+        const THEBE_JS_URL = "{ THEBE_JS_URL }"
         const thebe_selector = "{ app.config.thebe_config['selector'] }"
         const thebe_selector_input = "{ app.config.thebe_config['selector_input'] }"
         const thebe_selector_output = "{ app.config.thebe_config['selector_output'] }"
@@ -81,8 +82,7 @@ def init_thebe_core(app, env, docnames):
 
     if config_thebe.get("always_load") is True:
         # If we've got `always load` on, then load thebe on every page.
-        thebejs = f"https://unpkg.com/thebe@{THEBE_VERSION}/lib/index.js"
-        app.add_js_file(thebejs)
+        app.add_js_file(THEBE_JS_URL, **{"async": "async"})
 
 def update_thebe_context(app, doctree, docname):
     """Add thebe config nodes to this doctree using page-dependent information."""

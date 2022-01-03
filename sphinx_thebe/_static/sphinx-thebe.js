@@ -80,8 +80,9 @@ var initThebe = () => {
     if (typeof thebelab === "undefined") {
         console.log("[sphinx-thebe]: Loading thebe from CDN...");
         $(".thebe-launch-button ").text("Loading thebe from CDN...");
+
         const script = document.createElement('script');
-        script.src = `https://unpkg.com/thebe@${THEBE_VERSION}/lib/index.js`;
+        script.src = `${THEBE_JS_URL}`;
         document.head.appendChild(script);
 
         // Runs once the script has finished loading
