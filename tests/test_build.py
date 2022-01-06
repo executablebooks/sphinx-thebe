@@ -18,7 +18,6 @@ def sphinx_build(tmpdir_factory):
         path_html = path_build.joinpath("html")
         path_pg_index = path_html.joinpath("index.html")
         path_pg_config = path_html.joinpath("configure.html")
-        path_pg_chglg = path_html.joinpath("changelog.html")
         cmd_base = ["sphinx-build", ".", "_build/html", "-a", "-W"]
 
         def copy(self, path=None):
@@ -70,20 +69,23 @@ def test_sphinx_thebe(file_regression, sphinx_build):
     lb_text = "\n\n".join([ii.prettify() for ii in launch_buttons])
     file_regression.check(lb_text, basename="launch_buttons", extension=".html")
 
-    # Thebe JS should not be loaded by default (is loaded lazily)
-    soup_chlg = BeautifulSoup(
-        Path(sphinx_build.path_pg_chglg).read_text(), "html.parser"
-    )
-    assert "https://unpkg.com/thebe" not in soup_chlg.prettify()
 
-
-def test_always_load(file_regression, sphinx_build):
+def test_lazy_load(file_regression, sphinx_build):
     """Test building with thebe."""
     sphinx_build.copy()
+    url = "https://unpkg.com/thebe@0.8.2/lib/index.js"  # URL to search for
 
-    # Basic build with defaults
-    sphinx_build.build(cmd=["-D", "thebe_config.always_load=true"])
-
-    # Thebe should not 
+    # Thebe JS should not be loaded by default (is loaded lazily)
+    sphinx_build.build()
     soup_ix = BeautifulSoup(Path(sphinx_build.path_pg_index).read_text(), "html.parser")
-    assert "https://unpkg.com/thebe" in soup_ix.prettify()
+    sources = [ii.attrs.get("src") for ii in soup_ix.select("script")]
+    thebe_source = [ii for ii in sources if ii == url]
+    assert len(thebe_source) == 0
+
+    # always_load=True should force this script to load on all pages
+    sphinx_build.build(cmd=["-D", "thebe_config.always_load=true"])
+    soup_ix = BeautifulSoup(Path(sphinx_build.path_pg_index).read_text(), "html.parser")
+    sources = [ii.attrs.get("src") for ii in soup_ix.select("script")]
+    thebe_source = [ii for ii in sources if ii == url]
+    assert len(thebe_source) == 1
+
