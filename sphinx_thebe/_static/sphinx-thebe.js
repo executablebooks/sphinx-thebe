@@ -1,21 +1,10 @@
 /**
  * Add attributes to Thebe blocks to initialize thebe properly
  */
-
-var initThebe = () => {
-    // If Thebelab hasn't loaded, wait a bit and try again. This
-    // happens because we load ClipboardJS asynchronously.
-    if (window.thebelab === undefined) {
-        console.log("thebe not loaded, retrying...");
-        setTimeout(initThebe, 500)
-        return
-    }
-
-    console.log("Adding thebe to code cells...");
-
+var configureThebe = () => {
     // Load thebe config in case we want to update it as some point
+    console.log("[sphinx-thebe]: Loading thebe config...");
     thebe_config = $('script[type="text/x-thebe-config"]')[0]
-
 
     // If we already detect a Thebe cell, don't re-run
     if (document.querySelectorAll('div.thebe-cell').length > 0) {
@@ -56,8 +45,12 @@ var initThebe = () => {
             });
         }
     });
+}
 
-
+/**
+ * Update the page DOM to use Thebe elements
+ */
+var modifyDOMForThebe = () => {
     // Find all code cells, replace with Thebe interactive code cells
     const codeCells = document.querySelectorAll(thebe_selector)
     codeCells.forEach((codeCell, index) => {
@@ -80,9 +73,31 @@ var initThebe = () => {
             }
         }
     });
+}
 
-    // Init thebe
-    thebelab.bootstrap();
+var initThebe = () => {
+    // Load thebe dynamically if it's not already loaded
+    if (typeof thebelab === "undefined") {
+        console.log("[sphinx-thebe]: Loading thebe from CDN...");
+        $(".thebe-launch-button ").text("Loading thebe from CDN...");
+
+        const script = document.createElement('script');
+        script.src = `${THEBE_JS_URL}`;
+        document.head.appendChild(script);
+
+        // Runs once the script has finished loading
+        script.addEventListener('load', () => {
+            console.log("[sphinx-thebe]: Finished loading thebe from CDN...");
+            configureThebe();
+            modifyDOMForThebe();
+            thebelab.bootstrap();
+        });
+    } else {
+        console.log("[sphinx-thebe]: thebe already loaded, not loading from CDN...");
+        configureThebe();
+        modifyDOMForThebe();
+        thebelab.bootstrap();
+    }
 }
 
 // Helper function to munge the language name
