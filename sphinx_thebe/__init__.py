@@ -180,7 +180,7 @@ class ThebeButtonNode(nodes.Element):
     def html(self):
         text = self["text"]
         return (
-            '<button title="{text}" class="thebelab-button thebe-launch-button"'
+            '<button title="{text}" class="thebelab-button thebe-launch-button" '
             'onclick="initThebe()">{text}</button>'.format(text=text)
         )
 
