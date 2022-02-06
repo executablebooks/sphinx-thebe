@@ -56,6 +56,6 @@ setup(
             "sphinx-copybutton",
             "sphinx-panels",
         ],
-        "testing": ["pytest", "pytest-regressions", "beautifulsoup4"],
+        "testing": ["matplotlib", "pytest", "pytest-regressions", "beautifulsoup4"],
     },
 )
