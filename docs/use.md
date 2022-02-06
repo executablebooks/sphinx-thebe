@@ -98,6 +98,34 @@ import matplotlib.pyplot as plt
 plt.scatter(*data, c=data[0], s=200)
 ```
 
+## Structure of a `thebe` cell
+
+`sphinx-thebe` can work with two basic code cell structures:
+
+1. **A single code cell**. In this case, there is just a single code cell that has content that should be made executable, like so:
+   
+   ```html
+   <div class="highlight">
+       <pre>print("hi!")</pre>
+    </div>
+    ```
+2. **An input/output cell**. Jupyter tools define code cells as a combination of inputs and outputs.
+   For example:
+
+   ```html
+   <div class="cell">
+     <div class="cell_input">
+       <pre>print("hi!")</pre>
+     </div>
+     <div class="cell_output">
+       ...outputs here...
+     </div>
+   </div>
+   ```
+
+   In this case, `sphinx-thebe` will treat the `cell_output` in a special fashion, so that it is cleared when you first run its corresponding input code.
+
+
 (use:selectors)=
 ## Selectors `sphinx-thebe` looks for by default
 
