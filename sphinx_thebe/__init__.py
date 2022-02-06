@@ -27,7 +27,7 @@ def init_thebe_default_config(app, env, docnames):
     defaults = {
         "always_load": False,
         "selector": ".thebe,.cell",
-        "selector_input": "pre, .cell_input",
+        "selector_input": "pre",
         "selector_output": ".output, .cell_output",
     }
     for key, val in defaults.items():

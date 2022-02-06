@@ -53,6 +53,7 @@ setup(
             "matplotlib",
             "myst-nb",
             "sphinx-book-theme",
+            "sphinx-copybutton",
             "sphinx-panels",
         ],
         "testing": ["pytest", "pytest-regressions", "beautifulsoup4"],
