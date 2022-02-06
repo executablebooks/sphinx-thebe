@@ -33,7 +33,7 @@ def init_thebe_default_config(app, env, docnames):
     for key, val in defaults.items():
         if key not in thebe_config:
             thebe_config[key] = val
-    
+
     # Standardize types for certain values
     BOOL_KEYS = ["always_load"]
     for key in BOOL_KEYS:
@@ -55,15 +55,17 @@ def _do_load_thebe(doctree, config_thebe):
 
     # If we aren't properly configured
     if not config_thebe:
-        logger.warning("[sphinx-thebe]: Didn't find `thebe_config` in conf.py, add to use thebe")
+        logger.warning(
+            "[sphinx-thebe]: Didn't find `thebe_config` in conf.py, add to use thebe"
+        )
         return False
-    
+
     return True
 
 
 def init_thebe_core(app, env, docnames):
     """Add scripts to configure thebe, and optionally add thebe itself.
-    
+
     By default, defer loading the `thebe` JS bundle until bootstrap is called
     in order to speed up page load times.
     """
@@ -83,6 +85,7 @@ def init_thebe_core(app, env, docnames):
     if config_thebe.get("always_load") is True:
         # If we've got `always load` on, then load thebe on every page.
         app.add_js_file(THEBE_JS_URL, **{"async": "async"})
+
 
 def update_thebe_context(app, doctree, docname):
     """Add thebe config nodes to this doctree using page-dependent information."""
@@ -160,7 +163,9 @@ def _split_repo_url(url):
         end = url.split("github.com/")[-1]
         org, repo = end.split("/")[:2]
     else:
-        logger.warning(f"[sphinx-thebe]: Currently Thebe repositories must be on GitHub, got {url}")
+        logger.warning(
+            f"[sphinx-thebe]: Currently Thebe repositories must be on GitHub, got {url}"
+        )
         org = repo = None
     return org, repo
 

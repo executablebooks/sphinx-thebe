@@ -25,9 +25,28 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     package_data={
-        "sphinx_thebe": ["_static/sphinx-thebe.css", "_static/sphinx-thebe.js",]
+        "sphinx_thebe": [
+            "_static/sphinx-thebe.css",
+            "_static/sphinx-thebe.js",
+        ]
     },
-    classifiers=["License :: OSI Approved :: MIT License"],
+    classifiers=[
+        "License :: OSI Approved :: MIT License",
+        "Development Status :: 4 - Beta",
+        "Framework :: Sphinx :: Extension",
+        "Intended Audience :: Developers",
+        "License :: OSI Approved :: BSD License",
+        "License :: OSI Approved :: MIT License",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3 :: Only",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: Implementation :: CPython",
+        "Programming Language :: Python :: Implementation :: PyPy",
+        "Topic :: Software Development :: Libraries :: Python Modules",
+    ],
     install_requires=["sphinx>=3.5,<5"],
     extras_require={
         "sphinx": [

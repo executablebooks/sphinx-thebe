@@ -88,4 +88,3 @@ def test_lazy_load(file_regression, sphinx_build):
     sources = [ii.attrs.get("src") for ii in soup_ix.select("script")]
     thebe_source = [ii for ii in sources if ii == url]
     assert len(thebe_source) == 1
-
