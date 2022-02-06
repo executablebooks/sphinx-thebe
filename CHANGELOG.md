@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.1.1 - 2022-02-06
+
+A minor feature addition release to add default CSS selectors for MyST-NB cells.
+
+([full changelog](https://github.com/executablebooks/sphinx-thebe/compare/v0.1.0...ff1fd4b40615c32e6c9d0a60b98434cc1fe2f084))
+
+- ENH: Add defaults for MyST-NB [#48](https://github.com/executablebooks/sphinx-thebe/pull/48) ([@choldgraf](https://github.com/choldgraf))
+
+
 ## v0.1.0 - 2022-02-05
 
 ([full changelog](https://github.com/executablebooks/sphinx-thebe/compare/v0.0.10...4d1a60c5126ce633b1a36de43b4990b2f4d08730))
