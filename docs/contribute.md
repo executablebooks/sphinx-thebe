@@ -1,4 +1,4 @@
-# Contributing to Sphinx-Thebe
+# Contribute to `sphinx-thebe`
 
 Thanks for your interest in contributing to `sphinx-thebe`, your contributions are welcome and appreciated 🎉. This page contains some information to help you get started.
 

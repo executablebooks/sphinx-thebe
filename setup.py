@@ -50,9 +50,9 @@ setup(
     install_requires=["sphinx>=3.5,<5"],
     extras_require={
         "sphinx": [
-            "myst-parser[sphinx]",
+            "matplotlib",
+            "myst-nb",
             "sphinx-book-theme",
-            "jupyter-sphinx",
             "sphinx-panels",
         ],
         "testing": ["pytest", "pytest-regressions", "beautifulsoup4"],
