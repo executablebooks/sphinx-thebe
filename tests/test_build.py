@@ -81,7 +81,7 @@ def test_sphinx_thebe(file_regression, sphinx_build):
     cell = soup_nb.select(".cell")[0]
     
     # Remove the *content* of input/output since we only care about the DOM structure
-    cell.select(".cell_input")[0].clear()
+    cell.select(".cell_input pre")[0].clear()
     cell.select(".cell_output")[0].clear()
     file_regression.check(
         cell.prettify(), basename="myst-nb__cell", extension=".html"
