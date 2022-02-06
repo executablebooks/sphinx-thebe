@@ -18,6 +18,7 @@ def sphinx_build(tmpdir_factory):
         path_html = path_build.joinpath("html")
         path_pg_index = path_html.joinpath("index.html")
         path_pg_config = path_html.joinpath("configure.html")
+        path_pg_ntbk = path_html.joinpath("examples/notebooks.html")
         cmd_base = ["sphinx-build", ".", "_build/html", "-a", "-W"]
 
         def copy(self, path=None):
@@ -29,7 +30,6 @@ def sphinx_build(tmpdir_factory):
                 copytree(path, self.path_tmp_docs)
                 # Copy since it's loaded with an `include` directive
                 copy(path_changelog, self.path_tmp)
-                
 
         def build(self, cmd=None):
             """Build the test book"""
@@ -72,6 +72,20 @@ def test_sphinx_thebe(file_regression, sphinx_build):
     launch_buttons = soup_conf.select(".thebe-launch-button")
     lb_text = "\n\n".join([ii.prettify() for ii in launch_buttons])
     file_regression.check(lb_text, basename="launch_buttons", extension=".html")
+
+    # Check for MyST-NB cell structure to make sure it stays the same
+    # If this breaks, we'll need to update our default cell selectors
+    soup_nb = BeautifulSoup(
+        Path(sphinx_build.path_pg_ntbk).read_text(), "html.parser"
+    )
+    cell = soup_nb.select(".cell")[0]
+    
+    # Remove the *content* of input/output since we only care about the DOM structure
+    cell.select(".cell_input")[0].clear()
+    cell.select(".cell_output")[0].clear()
+    file_regression.check(
+        cell.prettify(), basename="myst-nb__cell", extension=".html"
+    )
 
 
 def test_lazy_load(file_regression, sphinx_build):
