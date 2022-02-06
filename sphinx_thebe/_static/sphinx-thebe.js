@@ -69,6 +69,7 @@ var modifyDOMForThebe = () => {
     // Clean up the language to make it work w/ CodeMirror and add it to the cell
     dataLanguage = detectLanguage(kernelName);
 
+    // Re-arrange the cell and add metadata
     if (codeCellText) {
       codeCellText.setAttribute("data-language", dataLanguage);
       codeCellText.setAttribute("data-executable", "true");
@@ -79,6 +80,11 @@ var modifyDOMForThebe = () => {
         $(codeCellOutput).insertAfter(codeCellText);
       }
     }
+
+    // Remove sphinx-copybutton blocks, which are common in Sphinx
+    codeCell.querySelectorAll("button.copybtn").forEach((el) => {
+      el.remove();
+    });
   });
 };
 

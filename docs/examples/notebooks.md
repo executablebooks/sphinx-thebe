@@ -21,13 +21,9 @@ You should then be able to run and edit the code cell in the notebook.
 ```{thebe-button} Launch thebe
 ```
 
-## Code style
+The outputs should be displayed below, but they will be collected by `sphinx-thebe` when it is activated so that they are cleared when you first run the cell.
 
-Thebe uses CodeMirror in the background, which uses different styles than pygments, which is used for static code syntax highlighting.
-
-Static code:
-
-```
+```{code-cell}
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -41,9 +37,14 @@ fig, ax = plt.subplots()
 ax.scatter(data[0], data[1], c=np.abs(data[2]), s=np.abs(data[2])*100)
 ```
 
-The outputs should be displayed below, but they will be collected by `sphinx-thebe` when it is activated so that they are cleared when you first run the cell.
+## Code style
 
-```{code-cell}
+Thebe uses CodeMirror in the background, which uses different styles than pygments, which is used for static code syntax highlighting.
+
+The below code block is **static** and will not be converted with `thebe`.
+We include it in order to compare the active Thebe cell's syntax highlighting with an inactive cell.
+
+```
 import numpy as np
 import matplotlib.pyplot as plt
 

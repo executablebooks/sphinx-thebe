@@ -23,6 +23,13 @@ See the [ExecutableBooks developer guidelines](https://executablebooks.org/en/la
 - The sphinx package is contained in `sphinx_thebe/`. The `__init__.py` file contains the code that activates and loads the proper CSS and JS when Sphinx is run.
 - CSS and Javascript assets are in `sphinx_thebe/_static`. These handle the activation of `thebe` on a page via a button-click, and also make minor modification to the page's DOM to make it work well with `thebe`.
 
+## Code style
+
+The JavaScript and CSS assets for this repository follow the default values for [prettier](https://prettier.io/).
+
+Python code follows `black` and `pep8` as described in [the EBP contributing guide](https://executablebooks.org/en/latest/contributing.html#coding-style).
+
+
 ## Installation for development
 
 To install `sphinx-thebe` for development clone and install `sphinx-thebe` locally:
