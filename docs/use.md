@@ -1,15 +1,14 @@
-# Using `sphinx-thebe`
+# Use `sphinx-thebe`
+
+`sphinx-thebe` uses remote Jupyter kernels to execute your page's code and return the
+results, and [Binder](https://mybinder.org) to run the infrastructure for execution.
+You can do nearly anything with `sphinx-thebe` that you could do from within a Jupyter Notebook cell.
 
 ## Get started
 
 There are two steps to using `sphinx-thebe`. First, you must mark certain
 parts of your page as "ready for thebe". Next, you must insert a button onto
 the page to tell Thebe to initialize.
-
-:::{admonition} Using reStructuredText vs. MyST Markdown
-:class: tip
-The examples on this page use **MyST Markdown syntax**, a form of markdown that works with Sphinx directives. You can also use reStructuredText if you wish. For information about reStructuredText vs. MyST Markdown, see [the MyST Parser documentation](https://myst-parser.readthedocs.io/en/latest/using/syntax.html) as well as [](examples/rst) for some tips.
-:::
 
 ### Mark elements for thebe
 
@@ -19,8 +18,9 @@ the class `thebe` and that have a `<pre`> element underneath them.
 You can add code blocks like so:
 
 ````
-```{code-block}
+```{code-block} python
 :class: thebe
+print("hello world!")
 ```
 ````
 
@@ -37,36 +37,34 @@ directive:
 ```
 ````
 
-The button looks like this:
+### An example
+
+Here is what it looks like when you add the two snippets above in one example:
+
+First the code block:
+
+```{code-block} python
+:class: thebe
+print("hello world!")
+```
+
+And now the Thebe button:
 
 ```{thebe-button}
 ```
 
-Clicking this button will activate Thebe on the page. If you'd like to manually
-add your own button (e.g. with your own extension or theme), see [](add-custom-button).
+Clicking this button will activate Thebe on the page.
+If you'd like to manually add your own button (e.g. with your own extension or theme), see [](add-custom-button).
 
-```{note}
+### Customize your environment
+
 By default, `sphinx-thebe` will serve the Binder environment for the
 [jupyter-stacks-datascience repository](https://github.com/binder-examples/jupyter-stacks-datascience).
 See [](configure.md) for information on choosing your own environment.
-```
 
-## What can I do with `sphinx-thebe`?
+## A few examples
 
-`sphinx-thebe` uses Jupyter kernels to execute your page's code and return the
-results, and Binder in order to run the infrastructure for execution. This means that
-you can do nearly anything with `sphinx-thebe` that you could do from within a
-Jupyter Notebook cell.
-
-```{admonition} You can customize your environment
-:class: tip
-
-You can customize the environment that powers your interactive code sessions using
-a Binder repository. This may allow for different kinds of functionality depending on
-the libraries that are installed. See [](configure.md) for more information.
-```
-
-For example:
+For example, click the button below (if you have not already clicked the button at the top of the page) and see the sections underneath to watch `sphinx-thebe` in action:
 
 ```{thebe-button} Launch examples below!
 ```
@@ -99,6 +97,52 @@ df.head(5)
 import matplotlib.pyplot as plt
 plt.scatter(*data, c=data[0], s=200)
 ```
+
+## Structure of a `thebe` cell
+
+`sphinx-thebe` can work with two basic code cell structures:
+
+1. **A single code cell**. In this case, there is just a single code cell that has content that should be made executable, like so:
+   
+   ```html
+   <div class="highlight">
+       <pre>print("hi!")</pre>
+    </div>
+    ```
+2. **An input/output cell**. Jupyter tools define code cells as a combination of inputs and outputs.
+   For example:
+
+   ```html
+   <div class="cell">
+     <div class="cell_input">
+       <pre>print("hi!")</pre>
+     </div>
+     <div class="cell_output">
+       ...outputs here...
+     </div>
+   </div>
+   ```
+
+   In this case, `sphinx-thebe` will treat the `cell_output` in a special fashion, so that it is cleared when you first run its corresponding input code.
+
+
+(use:selectors)=
+## Selectors `sphinx-thebe` looks for by default
+
+By default `sphinx-thebe` will look for two types of code blocks to turn into interactive cells:
+
+- Cells that match a custom class you can add manually.
+  It will match:
+  - Whole cells: match `.thebe`
+  - Cell inputs: match `pre`
+  - Cell outputs: match `.output`
+- Cells that match [MyST-NB code cells](https://myst-nb.readthedocs.io/).
+  It will match:
+  - Whole cells: match `.cell`
+  - Cell inputs: match `.cell_input`
+  - Cell outputs: match `.cell_output`
+
+To customize the selectors that `sphinx-thebe` looks for, see [](configure:selector).
 
 ## Interactive outputs
 

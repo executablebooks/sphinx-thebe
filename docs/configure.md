@@ -2,8 +2,9 @@
 thebe-kernel: ir
 ---
 
-# Configuring thebe
+# Configuration
 
+(configure:selector)=
 ## Change the HTML selector to mark interactive cells
 
 By default, `sphinx-thebe` will be run on any cells with the `thebe` class.

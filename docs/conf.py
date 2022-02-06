@@ -38,15 +38,15 @@ release = ""
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ["sphinx_thebe", "myst_parser", "sphinx_panels"]
+extensions = ["myst_nb", "sphinx_copybutton", "sphinx_panels", "sphinx_thebe"]
 
 thebe_config = {
     "repository_url": "https://github.com/binder-examples/jupyter-stacks-datascience",
     "path_to_docs": "docs",
     # "repository_branch": "master",
     # "selector": ".thebe",
-    # "selector_input": ,
-    # "selector_output": ,
+    # "selector_input": "",
+    # "selector_output": "",
     # "codemirror-theme": "blackboard",  # Doesn't currently work
     # "always_load": True,  # To load thebe on every page
 }

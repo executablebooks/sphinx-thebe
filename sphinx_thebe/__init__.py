@@ -26,9 +26,9 @@ def init_thebe_default_config(app, env, docnames):
     thebe_config = app.config.thebe_config
     defaults = {
         "always_load": False,
-        "selector": ".thebe",
+        "selector": ".thebe,.cell",
         "selector_input": "pre",
-        "selector_output": ".output",
+        "selector_output": ".output, .cell_output",
     }
     for key, val in defaults.items():
         if key not in thebe_config:
