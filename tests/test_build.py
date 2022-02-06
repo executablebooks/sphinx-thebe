@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 from pathlib import Path
 from subprocess import run
-from shutil import copytree, rmtree
+from shutil import copy, copytree, rmtree
 import pytest
 
 
@@ -24,8 +24,12 @@ def sphinx_build(tmpdir_factory):
             """Copy the specified book to our tests folder for building."""
             if path is None:
                 path = path_docs
+                path_changelog = path / "../CHANGELOG.md"
             if not self.path_tmp_docs.exists():
                 copytree(path, self.path_tmp_docs)
+                # Copy since it's loaded with an `include` directive
+                copy(path_changelog, self.path_tmp)
+                
 
         def build(self, cmd=None):
             """Build the test book"""
