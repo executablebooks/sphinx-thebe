@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.1.2 - 2022-04-29
+
+This is a minor patch release to fix a JSON metadata bug with myst-nb notebooks.
+
 ## v0.1.1 - 2022-02-06
 
 A minor feature addition release to add default CSS selectors for MyST-NB cells.
