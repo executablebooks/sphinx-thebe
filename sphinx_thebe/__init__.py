@@ -108,7 +108,10 @@ def update_thebe_context(app, doctree, docname):
     kernel_name = meta.get("thebe-kernel")
     if kernel_name is None:
         if meta.get("kernelspec"):
-            kernel_name = json.loads(meta["kernelspec"]).get("name")
+            if isinstance(meta.get("kernelspec"), str):
+                kernel_name = json.loads(meta["kernelspec"]).get("name")
+            else:
+                kernel_name = meta["kernelspec"].get("name")
         else:
             kernel_name = "python3"
 
