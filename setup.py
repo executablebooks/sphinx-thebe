@@ -47,14 +47,14 @@ setup(
         "Programming Language :: Python :: Implementation :: PyPy",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
-    install_requires=["sphinx>=3.5,<5"],
+    install_requires=["sphinx>=4,<6"],
     extras_require={
         "sphinx": [
             "matplotlib",
             "myst-nb",
             "sphinx-book-theme",
             "sphinx-copybutton",
-            "sphinx-panels",
+            "sphinx-design",
         ],
         "testing": ["matplotlib", "pytest", "pytest-regressions", "beautifulsoup4"],
     },

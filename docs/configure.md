@@ -36,8 +36,10 @@ code and Thebe will detect it.
 
 For example, the following code:
 
-``````{tabbed} MyST Markdown
-`````
+``````{tab-set}
+
+`````{tab-item} Myst Markdown
+
 ````{container} thebe
 ```{code-block} r
 print("hi")
@@ -47,10 +49,11 @@ print("hi")
 "hi"
 ```
 ````
-`````
-``````
 
-``````{tabbed} reStructuredText
+`````
+
+`````{tab-item} reStructuredText
+
 ```{code-block} rst
 .. container:: thebe
    .. code-block:: r
@@ -59,6 +62,9 @@ print("hi")
    .. container:: output
       "hi"
 ```
+
+`````
+
 ``````
 
 Defines a *parent container* in which we'll put both code and the output of the
@@ -146,21 +152,26 @@ qplot(hp, mpg, data=mtcars, shape=am, color=am,
 You can tag code blocks to run as soon as the kernel is ready (i.e., without any user input)
 by adding the `thebe-init` class to the code blocks. For example:
 
-`````{tabbed} MyST Markdown
-````
+`````{tab-set}
+
+````{tab-item} MyST Markdown
 ```{code-block}
 :class: thebe, thebe-init
 print("hi")
 ```
 ````
-`````
-`````{tabbed} reStructuredText
+
+````{tab-item} reStructuredText
+
 ```rst
 .. code-block::
    :class: thebe, thebe-init
    
    print("hi")
 ```
+
+````
+
 `````
 
 These code blocks will be run automatically once the kernel is ready, and their outputs
