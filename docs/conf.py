@@ -38,7 +38,7 @@ release = ""
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ["myst_nb", "sphinx_copybutton", "sphinx_panels", "sphinx_thebe"]
+extensions = ["myst_nb", "sphinx_copybutton", "sphinx_design", "sphinx_thebe"]
 
 thebe_config = {
     "repository_url": "https://github.com/binder-examples/jupyter-stacks-datascience",
@@ -70,7 +70,8 @@ master_doc = "index"
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+# language = None
+# Not recommended sphinx >=5. https://github.com/sphinx-doc/sphinx/issues/10474
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -101,21 +102,6 @@ html_theme_options = {
     "launch_buttons": {"thebelab": True},
 }
 
-# Add any paths that contain custom static files (such as style sheets) here,
-# relative to this directory. They are copied after the builtin static files,
-# so a file named "default.css" will overwrite the builtin "default.css".
-# html_static_path = ["_static"]
-
-# Custom sidebar templates, must be a dictionary that maps document names
-# to template names.
-#
-# The default sidebars (for documents that don't match any pattern) are
-# defined by theme itself.  Builtin themes are using these templates by
-# default: ``['localtoc.html', 'relations.html', 'sourcelink.html',
-# 'searchbox.html']``.
-#
-# html_sidebars = {}
-
 # CopyButton configuration
 copybutton_prompt_text = ">>> "
 # Switches for testing but shouldn't be activated in the live docs
@@ -123,8 +109,6 @@ copybutton_prompt_text = ">>> "
 # copybutton_remove_prompts = False
 # copybutton_image_path = "test/TEST_COPYBUTTON.png"
 # copybutton_selector = "div"
-
-panels_add_bootstrap_css = False
 
 # -- Options for HTMLHelp output ---------------------------------------------
 
