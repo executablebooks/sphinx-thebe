@@ -52,7 +52,7 @@ setup(
         "sphinx": [
             "matplotlib",
             "myst-nb",
-            "sphinx-book-theme",
+            "sphinx-book-theme>=0.4.0rc1",
             "sphinx-copybutton",
             "sphinx-design",
         ],
