@@ -47,7 +47,7 @@ setup(
         "Programming Language :: Python :: Implementation :: PyPy",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
-    install_requires=["sphinx>=4,<6"],
+    install_requires=["sphinx>=4,<7"],
     extras_require={
         "sphinx": [
             "matplotlib",
