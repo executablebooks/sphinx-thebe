@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.0 - 2023-01-05
+
+Minor improvements to support up to Sphinx 6. See https://github.com/executablebooks/sphinx-thebe/pull/57 for more details.
+
 ## v0.1.2 - 2022-04-29
 
 This is a minor patch release to fix a JSON metadata bug with myst-nb notebooks.
