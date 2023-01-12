@@ -146,6 +146,7 @@ def update_thebe_context(app, doctree, docname):
         }},
         kernelOptions: {{
             kernelName: "{kernel_name}",
+            name: "{kernel_name}",
             path: "{path_to_docs}{str(Path(docname).parent)}"
         }},
         predefinedOutput: true
