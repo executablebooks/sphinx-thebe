@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.1 - 2023-01-27
+
+- FIX: Add name to the kernelOptions [#60](https://github.com/executablebooks/sphinx-thebe/pull/60) (@joergbrech)
+ 
 ## v0.2.0 - 2023-01-05
 
 Minor improvements to support up to Sphinx 6. See https://github.com/executablebooks/sphinx-thebe/pull/57 for more details.
