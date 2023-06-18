@@ -1,0 +1,54 @@
+# This will run every time a tag is created and pushed to the repository.
+# It calls our tests workflow via a `workflow_call`, and if tests pass
+# then it triggers our upload to PyPI for a new release.
+name: Make a new release
+on:
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"
+      - "v[0-9]+.[0-9]+.[0-9]+-rc[0-9]+"
+
+jobs:
+  tests:
+    uses: ./.github/workflows/tests.yml
+  dist:
+    name: publish
+    needs: [tests] # require tests to pass before deploy runs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+      - name: Build package
+        run: pipx run build
+      - uses: actions/upload-artifact@v3
+        with:
+          path: dist/*
+  upload_pypi:
+    name: publish
+    needs: [dist]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: artifact
+          path: dist
+      - name: Publish
+        uses: pypa/gh-action-pypi-publish@v1.6.4
+        with:
+          user: __token__
+          password: ${{ secrets.PYPI_KEY }}
+  release:
+    needs: [ upload_pypi ]
+    name: Create release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: softprops/action-gh-release@v1
+        with:
+          name: Sphinx thebe ${{ github.ref_name }}
+          prerelease: ${{ contains(github.ref, 'rc') }}
+          generate_release_notes: true
