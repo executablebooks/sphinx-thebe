@@ -65,7 +65,7 @@ dev = [
 
 [tool.hatch]
 version.source = "vcs"
-build.hooks.vcs.version-file = "sphinx_thebe/_version.py"
+build.hooks.vcs.version-file = "src/sphinx_thebe/_version.py"
 
 [tool.pytest.ini_options]
 testpaths = [
