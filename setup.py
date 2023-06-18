@@ -50,12 +50,17 @@ setup(
     install_requires=["sphinx>=4"],
     extras_require={
         "sphinx": [
-            "matplotlib",
             "myst-nb",
             "sphinx-book-theme>=0.4.0rc1",
             "sphinx-copybutton",
             "sphinx-design",
         ],
-        "testing": ["matplotlib", "pytest", "pytest-regressions", "beautifulsoup4"],
+        "testing": [
+            "sphinx-thebe[sphinx]",
+            "matplotlib",
+            "pytest",
+            "pytest-regressions",
+            "beautifulsoup4",
+        ],
     },
 )
