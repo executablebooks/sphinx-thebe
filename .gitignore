@@ -128,4 +128,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+### Project specific
 docs/_build
+_version.py
