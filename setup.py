@@ -56,7 +56,9 @@ setup(
             "sphinx-design",
         ],
         "testing": [
-            "sphinx-thebe[sphinx]",
+            # TODO: Minimize the testing dependencies
+            "myst-parser",
+            "myst-nb",
             "matplotlib",
             "pytest",
             "pytest-regressions",

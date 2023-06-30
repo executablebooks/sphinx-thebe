@@ -6,7 +6,7 @@ import pytest
 
 
 path_tests = Path(__file__).parent.resolve()
-path_docs = path_tests.joinpath("..", "docs")
+path_docs = path_tests.joinpath("test_build", "src")
 
 
 @pytest.fixture(scope="session")
@@ -21,15 +21,10 @@ def sphinx_build(tmpdir_factory):
         path_pg_ntbk = path_html.joinpath("examples/notebooks.html")
         cmd_base = ["sphinx-build", ".", "_build/html", "-a", "-W"]
 
-        def copy(self, path=None):
+        def copy(self, path: Path = path_docs):
             """Copy the specified book to our tests folder for building."""
-            if path is None:
-                path = path_docs
-                path_changelog = path / "../CHANGELOG.md"
             if not self.path_tmp_docs.exists():
                 copytree(path, self.path_tmp_docs)
-                # Copy since it's loaded with an `include` directive
-                copy(path_changelog, self.path_tmp)
 
         def build(self, cmd=None):
             """Build the test book"""
