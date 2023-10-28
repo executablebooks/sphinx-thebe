@@ -51,7 +51,7 @@ sphinx = [
     "sphinx-design",
 ]
 testing = [
-    "myst-nb",
+    "myst-nb>=1.0.0rc0",
     "sphinx-copybutton",
     "sphinx-design",
     "matplotlib",
