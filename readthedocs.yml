@@ -4,7 +4,6 @@ build:
   tools:
     python: "3.12"
 python:
-  version: 3
   install:
       - method: pip
         path: .
