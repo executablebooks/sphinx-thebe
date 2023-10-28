@@ -15,7 +15,8 @@ jobs:
       fail-fast: false
       matrix:
         python-version: ["3.8", "3.9", "3.10", "3.11"]
-        sphinx: [ "~=4.0", "~=7.0" ]
+        # Latest and 2 major releases earlier
+        sphinx: [ "~=5.0", "~=7.0" ]
 
     steps:
     - uses: actions/checkout@v3
