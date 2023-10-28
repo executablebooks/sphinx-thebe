@@ -51,7 +51,9 @@ sphinx = [
     "sphinx-design",
 ]
 testing = [
-    "sphinx-thebe[sphinx]",
+    "myst-nb",
+    "sphinx-copybutton",
+    "sphinx-design",
     "matplotlib",
     "pytest",
     "pytest-regressions",
