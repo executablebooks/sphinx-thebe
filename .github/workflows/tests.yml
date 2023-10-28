@@ -2,7 +2,7 @@ name: continuous-integration
 
 on:
   push:
-    branches: [master]
+    branches: [main]
     tags:
       - 'v*'
   pull_request:
@@ -12,19 +12,23 @@ jobs:
   docs:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
-        python-version: [3.7, 3.8, 3.9]
+        python-version: ["3.8", "3.9", "3.10", "3.11"]
+        # Latest and 2 major releases earlier
+        sphinx: [ "~=5.0", "~=7.0" ]
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v1
+      uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
+        cache: pip
+    - name: Install sphinx-thebe with sphinx ${{ matrix.sphinx }}
       run: |
-        python -m pip install --upgrade pip
-        pip install -e .[sphinx,testing]
+        pip install --upgrade pip
+        pip install --upgrade "Sphinx${{ matrix.sphinx }}" -e .[testing]
     - name: Run tests
       run: |
         pytest

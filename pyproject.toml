@@ -1,0 +1,74 @@
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "sphinx-thebe"
+authors = [
+    { name = "Executable Books Team", email = "executablebooks@gmail.com" },
+]
+maintainers = [
+    # TODO: Add an actual maintainer
+    { name = "Executable Books Team", email = "executablebooks@gmail.com" },
+]
+description = "Integrate interactive code blocks into your documentation with Thebe and Binder."
+readme = "README.md"
+license = "MIT"
+license-files = { paths = ["LICENSE"] }
+requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Framework :: Sphinx :: Extension",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dynamic = ["version"]
+keywords = [
+    "development",
+    "docutils",
+    "sphinx",
+]
+dependencies = [
+    "sphinx>=4",
+]
+
+[project.urls]
+Homepage = "https://github.com/packit/packit"
+
+[project.optional-dependencies]
+sphinx = [
+    "myst-nb",
+    "sphinx-book-theme",
+    "sphinx-copybutton",
+    "sphinx-design",
+]
+testing = [
+    "myst-nb>=1.0.0rc0",
+    "sphinx-copybutton",
+    "sphinx-design",
+    "matplotlib",
+    "pytest",
+    "pytest-regressions",
+    "beautifulsoup4",
+]
+# TODO: Add pre-commits
+dev = [
+    "sphinx-thebe[testing]",
+]
+
+[tool.hatch]
+version.source = "vcs"
+build.hooks.vcs.version-file = "src/sphinx_thebe/_version.py"
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests",
+]

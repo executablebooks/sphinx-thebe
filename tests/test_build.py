@@ -19,7 +19,9 @@ def sphinx_build(tmpdir_factory):
         path_pg_index = path_html.joinpath("index.html")
         path_pg_config = path_html.joinpath("configure.html")
         path_pg_ntbk = path_html.joinpath("examples/notebooks.html")
-        cmd_base = ["sphinx-build", ".", "_build/html", "-a", "-W"]
+        # Test using our documentation but the Alabaster theme
+        # this avoids version pinning clashes with the Book Theme
+        cmd_base = ["sphinx-build", ".", "_build/html", "-D", "html_theme=alabaster", "-a"]
 
         def copy(self, path=None):
             """Copy the specified book to our tests folder for building."""
@@ -34,7 +36,8 @@ def sphinx_build(tmpdir_factory):
         def build(self, cmd=None):
             """Build the test book"""
             cmd = [] if cmd is None else cmd
-            run(self.cmd_base + cmd, cwd=self.path_tmp_docs, check=True)
+            output = run(self.cmd_base + cmd, cwd=self.path_tmp_docs, check=True, capture_output=True)
+            self.output = output
 
         def clean(self):
             """Clean the _build folder so files don't clash with new tests."""
@@ -49,6 +52,10 @@ def test_sphinx_thebe(file_regression, sphinx_build):
 
     # Basic build with defaults
     sphinx_build.build()
+
+    # No build warnings that were raised by sphinx-thebe
+    errors = list(sphinx_build.output.stderr.decode().split("\n"))
+    assert all(["[sphinx-thebe]" not in ii for ii in errors])
 
     # Testing index for base config
     soup_ix = BeautifulSoup(Path(sphinx_build.path_pg_index).read_text(), "html.parser")
