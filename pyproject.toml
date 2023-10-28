@@ -41,7 +41,7 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/packit/packit"
+Homepage = "https://github.com/executablebooks/sphinx-thebe"
 
 [project.optional-dependencies]
 sphinx = [
