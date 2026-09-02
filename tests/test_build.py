@@ -2,7 +2,11 @@ from bs4 import BeautifulSoup
 from pathlib import Path
 from subprocess import run
 from shutil import copy, copytree, rmtree
+from types import SimpleNamespace
+import re
 import pytest
+
+from sphinx_thebe import update_thebe_context
 
 
 path_tests = Path(__file__).parent.resolve()
@@ -113,3 +117,40 @@ def test_lazy_load(file_regression, sphinx_build):
     sources = [ii.attrs.get("src") for ii in soup_ix.select("script")]
     thebe_source = [ii for ii in sources if ii == url]
     assert len(thebe_source) == 1
+
+
+class _Doctree:
+    """Truthy doctree stub with append(), matching update_thebe_context's use."""
+
+    def __init__(self):
+        self.items = []
+
+    def __bool__(self):
+        return True
+
+    def append(self, node):
+        self.items.append(node)
+
+
+def test_codemirror_theme_in_binder_options():
+    """thebe 0.8.2 only applies themes from binderOptions.codeMirrorConfig.
+
+    Top-level codeMirrorConfig is ignored (see thebe v0.8.2 src/render.js).
+    """
+    app = SimpleNamespace(
+        config={"thebe_config": {"codemirror-theme": "dracula"}},
+        env=SimpleNamespace(metadata={}),
+    )
+    doctree = _Doctree()
+    update_thebe_context(app, doctree, "index")
+
+    html = doctree.items[0].astext()
+    match = re.search(
+        r"binderOptions:\s*\{[^}]*codeMirrorConfig:\s*\{[^}]*theme:\s*\"dracula\"",
+        html,
+        flags=re.DOTALL,
+    )
+    assert match, (
+        "codemirror-theme must be emitted under binderOptions.codeMirrorConfig "
+        f"so thebe 0.8.2 can load it; got:\n{html}"
+    )
