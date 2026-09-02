@@ -139,6 +139,10 @@ def update_thebe_context(app, doctree, docname):
         binderOptions: {{
             repo: "{org}/{repo}",
             ref: "{branch}",
+            codeMirrorConfig: {{
+                theme: "{codemirror_theme}",
+                mode: "{cm_language}"
+            }},
         }},
         codeMirrorConfig: {{
             theme: "{codemirror_theme}",
